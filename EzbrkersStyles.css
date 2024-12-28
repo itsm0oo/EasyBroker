@@ -1,0 +1,112 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+header, footer {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Form styling */
+form {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap if needed */
+    gap: 20px; /* Adds space between form elements */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold; /* Make the labels stand out */
+    width: 100%; /* Ensure labels take full width */
+}
+
+input, select, button {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; /* Make input and select elements take full width */
+}
+
+input[type="number"], select {
+    width: 100%; /* Make sure number inputs and select take full width */
+}
+
+/* Adjust input size for horizontal layout */
+input[type="number"], select, button {
+    width: 48%; /* Make them occupy 48% of the available space */
+}
+
+/* Adjusting layout for larger screens */
+@media (min-width: 768px) {
+    input[type="number"], select, button {
+        width: 48%; /* For larger screens, inputs take up 48% of the form width */
+    }
+
+    /* If we need additional spacing, we can adjust margins here */
+    input[type="number"], select {
+        margin-right: 4%; /* Right margin for spacing between inputs */
+    }
+}
+
+/* Styling the submit button */
+button {
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    width: 100%; /* Make the submit button take full width */
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Results section styling */
+#results {
+    margin-top: 20px;
+}
+
+#results div {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#results h3 {
+    margin-top: 0;
+}
+/* Style for dynamic filters */
+#apartmentFilter, #villaFilter {
+    margin-top: 10px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}

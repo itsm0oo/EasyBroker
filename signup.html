@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Your Website</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your shared CSS -->
+</head>
+<body>
+    <!-- Add your website's navigation bar or header -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="add-property.html">Add Property</a></li>
+                <li><a href="sign-in.html">Sign In</a></li>
+                <li><a href="sign-up.html">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sign Up Form Section -->
+    <section class="sign-up-container">
+        <h2>Create a New Account</h2>
+        <form id="signUpForm">
+            <!-- Email Field -->
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+            </div>
+
+            <!-- Password Field -->
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div>
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit">Sign Up</button>
+            </div>
+        </form>
+
+        <p>Already have an account? <a href="sign_in.html">Sign In</a></p>
+    </section>
+
+    <script src="sign-up.js"></script> <!-- Link to JavaScript to handle sign-up logic -->
+</body>
+</html>

@@ -10,8 +10,6 @@ sign_in_btn.addEventListener("click", () => {
   container.classList.remove("sign-up-mode");
 });
 
-//2
-
 const signUpForm = document.getElementById("signUpForm");
 signUpForm.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
@@ -47,41 +45,27 @@ signUpForm.addEventListener("submit", function (event) {
     window.location.href = "sign-in.html";
 });
 
-//3
+//sign in 
 
-<div class="container">
-    <div class="form-container sign-up-container">
-        <form id="signUpForm">
-            <h1>Sign Up</h1>
-            <input type="email" id="email" placeholder="Enter your email" required />
-            <input type="password" id="password" placeholder="Enter your password" required />
-            <input type="password" id="confirmPassword" placeholder="Confirm your password" required />
-            <button type="submit">Sign Up</button>
-        </form>
-    </div>
-    
-    <div class="form-container sign-in-container">
-        <form id="loginForm">
-            <h1>Sign In</h1>
-            <input type="email" id="email" placeholder="Enter your email" required />
-            <input type="password" id="password" placeholder="Enter your password" required />
-            <button type="submit">Sign In</button>
-        </form>
-    </div>
+const signInForm = document.getElementById("loginForm");
+signInForm.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission
 
-    <div class="overlay-container">
-        <div class="overlay">
-            <div class="overlay-panel overlay-left">
-                <h1>Welcome Back!</h1>
-                <p>To keep connected with us, please log in with your personal info</p>
-                <button id="sign-in-btn" class="ghost">Sign In</button>
-            </div>
-            <div class="overlay-panel overlay-right">
-                <h1>Hello, Friend!</h1>
-                <p>Enter your personal details and start your journey with us</p>
-                <button id="sign-up-btn" class="ghost">Sign Up</button>
-            </div>
-        </div>
-    </div>
-</div>
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    // Get users from localStorage
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Find the user that matches the entered email and password
+    const user = users.find(user => user.email === email && user.password === password);
+
+    if (user) {
+        alert("Sign In Successful!");
+        // Redirect to a new page after successful login (e.g., dashboard.html)
+        window.location.href = "dashboard.html";
+    } else {
+        alert("Invalid email or password.");
+    }
+});
 

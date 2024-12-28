@@ -13,7 +13,7 @@ signInBtn.addEventListener("click", () => {
 });
 
 // Handling Sign Up Form Submission
-document.getElementById("signUpForm").addEventListener("submit", function (event) {
+document.getElementById("signUpForm").addEventListener("submit", async function (event) {
   event.preventDefault(); // Prevent form from submitting
 
   const email = document.getElementById("email-signup").value;
@@ -26,40 +26,58 @@ document.getElementById("signUpForm").addEventListener("submit", function (event
     return;
   }
 
-  // Get existing users from localStorage or initialize an empty array
-  let users = JSON.parse(localStorage.getItem("users")) || [];
+  // Send data to the server for sign-up
+  try {
+    const response = await fetch('http://localhost:5000/api/signup', {  // Change URL to match your backend
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
-  // Check if the email already exists
-  if (users.some((user) => user.email === email)) {
-    alert("An account with this email already exists.");
-    return;
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Account created successfully!");
+      window.location.href = "sign-in.html"; // Redirect to Sign-In page after successful sign up
+    } else {
+      alert(data.message); // Show error message
+    }
+  } catch (error) {
+    console.error("Error during sign-up:", error);
+    alert("An error occurred. Please try again later.");
   }
-
-  // Save new user in localStorage
-  users.push({ email, password });
-  localStorage.setItem("users", JSON.stringify(users));
-
-  alert("Account created successfully!");
-  window.location.href = "sign-in.html"; // Redirect to Sign-In page after successful sign up
 });
 
 // Handling Sign In Form Submission
-document.getElementById("loginForm").addEventListener("submit", function (event) {
+document.getElementById("loginForm").addEventListener("submit", async function (event) {
   event.preventDefault(); // Prevent form from submitting
 
   const email = document.getElementById("email-signin").value;
   const password = document.getElementById("password-signin").value;
 
-  // Get users from localStorage
-  let users = JSON.parse(localStorage.getItem("users")) || [];
+  // Send data to the server for sign-in
+  try {
+    const response = await fetch('http://localhost:5000/api/signin', {  // Change URL to match your backend
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
-  // Find user with matching email and password
-  const user = users.find((user) => user.email === email && user.password === password);
+    const data = await response.json();
 
-  if (user) {
-    alert("Sign In successful!");
-    window.location.href = "dashboard.html"; // Redirect to dashboard after successful login
-  } else {
-    alert("Invalid email or password.");
+    if (response.ok) {
+      alert("Sign In successful!");
+      localStorage.setItem('token', data.token);  // Store JWT token in localStorage for session
+      window.location.href = "dashboard.html"; // Redirect to dashboard after successful login
+    } else {
+      alert(data.message);  // Show error message
+    }
+  } catch (error) {
+    console.error("Error during sign-in:", error);
+    alert("An error occurred. Please try again later.");
   }
 });

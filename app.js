@@ -42,7 +42,7 @@ document.getElementById("signUpForm").addEventListener("submit", async function 
       alert("Account created successfully!");
       window.location.href = "sign-in.html"; // Redirect to Sign-In page after successful sign up
     } else {
-      alert(data.message); // Show error message
+      alert(data.message || "An error occurred. Please try again."); // Show error message
     }
   } catch (error) {
     console.error("Error during sign-up:", error);
@@ -74,7 +74,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
       localStorage.setItem('token', data.token);  // Store JWT token in localStorage for session
       window.location.href = "dashboard.html"; // Redirect to dashboard after successful login
     } else {
-      alert(data.message);  // Show error message
+      alert(data.message || "Invalid email or password.");  // Show error message
     }
   } catch (error) {
     console.error("Error during sign-in:", error);

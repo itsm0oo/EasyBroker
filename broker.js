@@ -1,17 +1,33 @@
-// بيانات العقارات (مثال)
-const properties = [
-    { location: "sahel", type: "apartment", budget: 6000000, downpayment: 500000, installments: 10000 },
-    { location: "new_cairo", type: "villa", budget: 15000000, downpayment: 5000000, installments: 24 },
-    { location: "october", type: "office", budget: 25000000, downpayment: 8000000, installments: 36 },
-    { location: "sahel", type: "store", budget: 12000000, downpayment: 3000000, installments: 18 },
-    { location: "new_cairo", type: "villa", budget: 18000000, downpayment: 4000000, installments: 24 },
-    { location: "october", type: "apartment", budget: 5000000, downpayment: 1500000, installments: 10 }
-];
+// متغير لتخزين بيانات العقارات
+let properties = [];
+
+// دالة لتحميل وتحليل ملف CSV من المشروع
+function loadCSV() {
+    fetch('properties.csv')
+        .then(response => response.text())
+        .then(csvData => {
+            Papa.parse(csvData, {
+                complete: function(results) {
+                    console.log("CSV file loaded successfully");
+                    console.log(results.data); // عرض البيانات في الكونسول
+                    properties = results.data;
+                    displayResults(properties); // عرض البيانات بعد التحميل
+                },
+                header: true,  // استخدام أول صف كعناوين
+                skipEmptyLines: true, // تجاهل الأسطر الفارغة
+            });
+        })
+        .catch(error => {
+            console.error("Error loading CSV file:", error);
+        });
+}
 
 // دالة لتصفية العقارات بناءً على المعايير المختارة
 function filterProperties() {
-    // الحصول على القيم المدخلة من النموذج
+    console.log("Filtering properties...");
+
     const location = document.getElementById("location").value;
+    const developer = document.getElementById("developer").value;
     const type = document.getElementById("type").value;
     const budgetRange = document.getElementById("budgetRange").value;
     const downpayment = document.getElementById("downpayment").value;
@@ -25,15 +41,18 @@ function filterProperties() {
     // تصفية العقارات بناءً على المعايير المختارة
     const filteredProperties = properties.filter(property => {
         const matchesLocation = !location || location === "" || property.location === location;
+        const matchesDeveloper = !developer || developer === "" || property.developer === developer;
         const matchesType = !type || type === "" || property.type === type;
         const matchesBudget = (property.budget >= minBudget && property.budget <= maxBudget);
         const matchesDownpayment = (property.downpayment >= minDownpayment && property.downpayment <= maxDownpayment);
         const matchesInstallments = (property.installments >= minInstallments && property.installments <= maxInstallments);
 
-        return matchesLocation && matchesType && matchesBudget && matchesDownpayment && matchesInstallments;
+        return matchesLocation && matchesDeveloper && matchesType && matchesBudget && matchesDownpayment && matchesInstallments;
     });
 
-    // عرض العقارات التي تم تصفيتها
+    console.log(filteredProperties); // عرض العقارات المصفاة في الكونسول
+
+    // عرض العقارات المصفاة
     displayResults(filteredProperties);
 }
 
@@ -48,7 +67,7 @@ function displayResults(filteredProperties) {
         const list = document.createElement('ul');
         filteredProperties.forEach(property => {
             const listItem = document.createElement('li');
-            listItem.textContent = `${property.type} في ${property.location} - الميزانية: ${property.budget} EGP`;
+            listItem.textContent = `${property.type} في ${property.location} - المطور: ${property.developer} - الميزانية: ${property.budget} EGP`;
             list.appendChild(listItem);
         });
         resultsContainer.appendChild(list);
@@ -58,7 +77,7 @@ function displayResults(filteredProperties) {
 // إضافة مستمع الحدث على زر البحث
 document.getElementById("searchButton").addEventListener("click", filterProperties);
 
-// عرض جميع العقارات بشكل افتراضي عند تحميل الصفحة
+// تحميل ملف CSV تلقائيًا عند تحميل الصفحة
 document.addEventListener("DOMContentLoaded", function() {
-    displayResults(properties);
+    loadCSV();  // تحميل البيانات من ملف properties.csv
 });

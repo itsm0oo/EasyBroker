@@ -85,18 +85,46 @@ button:hover {
 /* Results section styling */
 #results {
     margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    min-height: 100px; /* Ensure enough space for results */
+    max-height: 500px; /* Optional: max height to prevent too long list */
+    overflow-y: auto; /* Allow scrolling if results exceed max-height */
 }
 
-#results div {
-    background-color: #fff;
+.property {
+    background-color: #f9f9f9;
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 10px;
+    transition: background-color 0.3s ease;
 }
 
-#results h3 {
+.property:hover {
+    background-color: #e8e8e8;
+}
+
+.property h3 {
     margin-top: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.property-location, .property-developer, .property-price {
+    font-size: 16px;
+    color: #555;
+}
+
+.property-price {
+    font-weight: bold;
+    color: #2d9cdb; /* A distinct color for price */
+}
+
+.property-location {
+    margin-bottom: 10px;
 }
 
 /* Style for dynamic filters */
@@ -142,27 +170,38 @@ select {
     background-color: #6C63FF;
 }
 
-/* Result List Styling */
-#results {
-    margin-top: 20px;
+/* Additional Styling for Search Results */
+.property-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.property-details .property-location,
+.property-details .property-developer,
+.property-details .property-price {
+    margin-bottom: 8px;
+}
+
+.property-details h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Enhance Results Container */
+#results ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#results li {
     padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    min-height: 100px; /* تأكد من أن المنطقة بها ارتفاع كافٍ */
-    max-height: 500px; /* اختياري: تحديد ارتفاع الحد الأقصى للصندوق */
-    overflow-y: auto; /* السماح بالتمرير في حالة وجود العديد من النتائج */
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+    background-color: #fafafa;
 }
 
-.property {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
+#results li:last-child {
+    border-bottom: none;
 }
-
-.property h3 {
-    margin-top: 0;
-}
-

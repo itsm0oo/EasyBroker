@@ -3,18 +3,18 @@ let properties = [];
 
 // دالة لتحميل وتحليل ملف CSV من المشروع
 function loadCSV() {
-    fetch('properties.csv')
-        .then(response => response.text())
+    fetch('properties.csv')  // تحميل الملف properties.csv من المشروع
+        .then(response => response.text())  // قراءة البيانات النصية من الملف
         .then(csvData => {
-            Papa.parse(csvData, {
+            Papa.parse(csvData, {  // استخدام مكتبة PapaParse لتحليل البيانات
                 complete: function(results) {
                     console.log("CSV file loaded successfully");
-                    console.log(results.data); // عرض البيانات في الكونسول
+                    console.log(results.data);  // عرض البيانات في الكونسول
                     properties = results.data;
-                    displayResults(properties); // عرض البيانات بعد التحميل
+                    displayResults(properties);  // عرض البيانات بعد التحميل
                 },
                 header: true,  // استخدام أول صف كعناوين
-                skipEmptyLines: true, // تجاهل الأسطر الفارغة
+                skipEmptyLines: true,  // تجاهل الأسطر الفارغة
             });
         })
         .catch(error => {
@@ -50,7 +50,7 @@ function filterProperties() {
         return matchesLocation && matchesDeveloper && matchesType && matchesBudget && matchesDownpayment && matchesInstallments;
     });
 
-    console.log(filteredProperties); // عرض العقارات المصفاة في الكونسول
+    console.log(filteredProperties);  // عرض العقارات المصفاة في الكونسول
 
     // عرض العقارات المصفاة
     displayResults(filteredProperties);
@@ -65,11 +65,39 @@ function displayResults(filteredProperties) {
         resultsContainer.innerHTML = '<p>لا توجد عقارات بناءً على معايير البحث.</p>';
     } else {
         const list = document.createElement('ul');
+        
         filteredProperties.forEach(property => {
             const listItem = document.createElement('li');
-            listItem.textContent = `${property.type} في ${property.location} - المطور: ${property.developer} - الميزانية: ${property.budget} EGP`;
+            
+            // Create container for property details
+            const detailsContainer = document.createElement('div');
+            detailsContainer.classList.add('property-details');
+
+            // Property type and location
+            const typeLocation = document.createElement('div');
+            typeLocation.classList.add('property-location');
+            typeLocation.textContent = `${property.type} في ${property.location}`;
+            detailsContainer.appendChild(typeLocation);
+
+            // Developer information
+            const developer = document.createElement('div');
+            developer.classList.add('property-developer');
+            developer.textContent = `المطور: ${property.developer}`;
+            detailsContainer.appendChild(developer);
+
+            // Budget and price details
+            const budget = document.createElement('div');
+            budget.classList.add('property-price');
+            budget.textContent = `${property.budget} EGP`;
+            detailsContainer.appendChild(budget);
+
+            // Append the details container to the list item
+            listItem.appendChild(detailsContainer);
+            
+            // Add the list item to the list
             list.appendChild(listItem);
         });
+
         resultsContainer.appendChild(list);
     }
 }

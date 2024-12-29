@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Property Search</title>
     <link rel="stylesheet" href="EzbrkersStyles.css">
-    <script src="broker.js"></script>
+    <script src="broker.js" defer></script>
 </head>
 <body>
 
@@ -14,8 +14,7 @@
     </header>
 
     <main>
-        <!-- نموذج البحث بدون id="searchForm" -->
-        <div class="search-form">
+        <form id="searchForm" class="search-form">
             <!-- Location Dropdown -->
             <div class="form-group">
                 <label for="location">Location</label>
@@ -71,20 +70,18 @@
                 <label for="installments">Installments Range</label>
                 <select id="installments" name="installments">
                     <option value="">All</option>
-                    <option value="0-500000">0K - 50k</option>
-                    <option value="50000-100000">50K - 100k</option>
-                    <option value="100001-150000">100K - 150k</option>
-                    <option value="150001-200000">150K - 200k</option>
-                    <option value="200001-300000">200K - 300k</option>
-                    <option value="300001-100000000000">300K - 10000000k</option>
+                    <option value="0-500000">0K - 50K</option>
+                    <option value="50000-100000">50K - 100K</option>
+                    <option value="100001-150000">100K - 150K</option>
+                    <option value="150001-200000">150K - 200K</option>
+                    <option value="200001-300000">200K - 300K</option>
+                    <option value="300001-100000000000">300K - 10000000K</option>
                 </select>
             </div>
 
-            <!-- Search Button (غير من نوع Submit إلى Button) -->
+            <!-- Search Button -->
             <button type="button" id="searchButton">Search</button>
-        </div>
-
-        <a href="Addunits.html" class="add-property-btn">Add a New Property</a>
+        </form>
 
         <!-- Results Section -->
         <div id="results"></div>
@@ -92,7 +89,6 @@
 
     <footer>
         <p>&copy; 2024 Property Broker System</p>
-        <a href="sign_in.html" class="sign-in-btn">Sign In</a>
     </footer>
 
     <script src="script.js"></script>

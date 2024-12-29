@@ -9,9 +9,7 @@ const properties = [
 ];
 
 // دالة لتصفية العقارات بناءً على المعايير المختارة
-function filterProperties(event) {
-    event.preventDefault(); // لمنع إرسال النموذج وإعادة تحميل الصفحة
-
+function filterProperties() {
     // الحصول على القيم المدخلة من النموذج
     const location = document.getElementById("location").value;
     const type = document.getElementById("type").value;
@@ -21,11 +19,7 @@ function filterProperties(event) {
 
     // تقسيم نطاق الميزانية إلى الحد الأدنى والحد الأقصى
     const [minBudget, maxBudget] = budgetRange ? budgetRange.split("-").map(Number) : [0, Infinity];
-
-    // تقسيم نطاق الدفع المبدئي إلى الحد الأدنى والحد الأقصى
     const [minDownpayment, maxDownpayment] = downpayment ? downpayment.split("-").map(Number) : [0, Infinity];
-
-    // تقسيم نطاق الأقساط إلى الحد الأدنى والحد الأقصى
     const [minInstallments, maxInstallments] = installments ? installments.split("-").map(Number) : [0, Infinity];
 
     // تصفية العقارات بناءً على المعايير المختارة
@@ -61,10 +55,10 @@ function displayResults(filteredProperties) {
     }
 }
 
+// إضافة مستمع الحدث على زر البحث
+document.getElementById("searchButton").addEventListener("click", filterProperties);
+
 // عرض جميع العقارات بشكل افتراضي عند تحميل الصفحة
 document.addEventListener("DOMContentLoaded", function() {
     displayResults(properties);
 });
-
-// إضافة مستمع الحدث على زر البحث وليس النموذج
-document.getElementById("searchButton").addEventListener("click", filterProperties);

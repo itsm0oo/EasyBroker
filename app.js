@@ -28,7 +28,7 @@ document.getElementById("signUpForm").addEventListener("submit", async function 
 
   // Send data to the server for sign-up
   try {
-    const response = await fetch('http://localhost:5000/api/signup', {  // Change URL to match your backend
+    const response = await fetch('https://itsm0oo.github.io/EasyBroker/', {  // Change URL to match your backend
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
   // Send data to the server for sign-in
   try {
-    const response = await fetch('http://localhost:5000/api/signin', {  // Change URL to match your backend
+    const response = await fetch('https://itsm0oo.github.io/EasyBroker/', {  // Change URL to match your backend
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

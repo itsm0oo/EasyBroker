@@ -1,74 +1,43 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const fs = require("fs");
 
-// إنشاء التطبيق
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// الاتصال بقاعدة بيانات MongoDB
-mongoose.connect('mongodb://localhost:27017/myapp', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+// مسار ملف الحسابات
+const accountsFilePath = "./accounts.txt";
 
-// مخطط المستخدم
-const userSchema = new mongoose.Schema({
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true }
-});
-
-const User = mongoose.model('User', userSchema);
-
-// مسار التسجيل (Sign Up)
-app.post('/signup', async (req, res) => {
-    const { email, password } = req.body;
-
-    // التحقق من وجود المستخدم بالفعل
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-        return res.status(400).json({ message: 'المستخدم موجود بالفعل' });
+// دالة للتحقق من الحساب
+function validateAccount(email, password) {
+  try {
+    const accounts = fs.readFileSync(accountsFilePath, "utf8").split("\n");
+    for (let account of accounts) {
+      const [storedEmail, storedPassword] = account.trim().split(",");
+      if (storedEmail === email && storedPassword === password) {
+        return true;
+      }
     }
+    return false;
+  } catch (error) {
+    console.error("Error reading accounts file:", error);
+    return false;
+  }
+}
 
-    // تشفير كلمة المرور
-    const hashedPassword = await bcrypt.hash(password, 10);
+// تسجيل الدخول
+app.post("/signin", (req, res) => {
+  const { email, password } = req.body;
 
-    // إنشاء مستخدم جديد
-    const newUser = new User({ email, password: hashedPassword });
-    await newUser.save();
-
-    // إنشاء توكن (JWT)
-    const token = jwt.sign({ id: newUser._id }, 'secretkey', { expiresIn: '1h' });
-
-    res.json({ message: 'تم إنشاء الحساب بنجاح', token });
+  if (validateAccount(email, password)) {
+    res.status(200).send({ message: "Sign In successful!" });
+  } else {
+    res.status(401).send({ message: "Invalid email or password." });
+  }
 });
 
-// مسار تسجيل الدخول (Sign In)
-app.post('/signin', async (req, res) => {
-    const { email, password } = req.body;
-
-    const user = await User.findOne({ email });
-    if (!user) {
-        return res.status(400).json({ message: 'بيانات الدخول غير صحيحة' });
-    }
-
-    // مقارنة كلمة المرور
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-        return res.status(400).json({ message: 'بيانات الدخول غير صحيحة' });
-    }
-
-    // إنشاء توكن (JWT)
-    const token = jwt.sign({ id: user._id }, 'secretkey', { expiresIn: '1h' });
-
-    res.json({ message: 'تم تسجيل الدخول بنجاح', token });
-});
-
-// بدء الخادم
-app.listen(5000, () => {
-    console.log('الخادم يعمل على http://localhost:5000');
-});
+// تشغيل السيرفر
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

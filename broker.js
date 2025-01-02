@@ -78,13 +78,13 @@ function displayResults(filteredProperties) {
             // Property type and location
             const typeLocation = document.createElement('div');
             typeLocation.classList.add('property-location');
-            typeLocation.textContent = `${property.type} في ${property.location}`;
+            typeLocation.textContent = `${property.type} in ${property.location}`;
             detailsContainer.appendChild(typeLocation);
 
             // Developer information
             const developer = document.createElement('div');
             developer.classList.add('property-developer');
-            developer.textContent = `المطور: ${property.developer}`;
+            developer.textContent = `dev: ${property.developer}`;
             detailsContainer.appendChild(developer);
 
             // Budget and price details

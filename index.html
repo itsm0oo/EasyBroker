@@ -1,131 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <h1>Easy Broker</h1>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Search</title>
-    <link rel="stylesheet" href="EzbrkersStyles.css">
-    <script src="broker.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <title>Sign Up / Sign In</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Linking your provided CSS -->
 </head>
 <body>
 
-    <header>
-        <h1>Search for Properties</h1>
-        
-        <a href="main.html" class="go-to-main-btn">Go back</a>
-        Easy Broker
+    <div class="container">
+        <div class="forms-container">
+            <!-- Sign-Up / Sign-In Forms Container -->
+            <div class="signin-signup">
+                <!-- Sign-Up Form -->
+                <form id="signUpForm" class="sign-up-form">
+                    <h1 class="title">Sign Up</h1>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="email" id="email-signup" placeholder="Enter your email" required />
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password-signup" placeholder="Enter your password" required />
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required />
+                    </div>
+                    <button type="submit" class="btn">Sign Up</button>
+                </form>
 
-
-       
-    </header>
-
-   
-
-    <main>
-        <form id="searchForm" class="search-form">
-            <!-- Location Dropdown -->
-            <div class="form-group">
-                <label for="location">Location</label>
-                <select id="location" name="location">
-                    <option value="">All</option>
-                    <option value="sahel">Sahel</option>
-                    <option value="new_cairo">New Cairo</option>
-                    <option value="october">October</option>
-                </select>
+                <!-- Sign-In Form -->
+                <form id="loginForm" class="sign-in-form">
+                    <h1 class="title">Sign In</h1>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="email" id="email-signin" placeholder="Enter your email" required />
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password-signin" placeholder="Enter your password" required />
+                    </div>
+                    <button type="submit" class="btn">Sign In</button>
+                </form>
             </div>
+        </div>
 
-            <!-- Developer Dropdown -->
-            <div class="form-group">
-                <label for="developer">Developer</label>
-                <select id="developer" name="developer">
-                    <option value="">All</option>
-                    <option value="MV">MV</option>
-                    <option value="Tatweer misr">Tatweer misr</option>
-                    <option value="roya">Roya</option>
-                    <option value="PRE">PRE</option>
-                </select>
+        <!-- Panels -->
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>New here?</h3>
+                    <p>Enter your personal details and start your journey with us</p>
+                    <button id="sign-up-btn" class="btn transparent">Sign Up</button>
+                </div>
             </div>
-
-            <!-- Property Type Dropdown -->
-            <div class="form-group">
-                <label for="type">Property Type</label>
-                <select id="type" name="type">
-                    <option value="">All</option>
-                    <option value="apartment">Apartment</option>
-                    <option value="villa">Villa</option>
-                    <option value="office">Office</option>
-                    <option value="store">Store</option>
-                </select>
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>Already have an account?</h3>
+                    <p>Sign in with your personal info</p>
+                    <button id="sign-in-btn" class="btn transparent">Sign In</button>
+                </div>
             </div>
-    
-            
-            <div class="form-group">
-                <label for="DelivaryDate">Delivery Date</label>
-                <select id="DelivaryDate" name="DelivaryDate">
-                    <option value="">All</option>
-                    <option value="RM">Ready to Move</option>
-                    <option value="1y">1 year</option>
-                    <option value="2y">2 years</option>
-                    <option value="3y">3 years</option>
-                </select>
-            </div>
-            
+        </div>
+    </div>
 
-            <!-- Budget Range Dropdown -->
-            <div class="form-group">
-                <label for="budgetRange">Budget Range</label>
-                <select id="budgetRange" name="budgetRange">
-                    <option value="">All</option>
-                    <option value="5000000-10000000">5 million - 10 million</option>
-                    <option value="10000001-20000000">10 million - 20 million</option>
-                    <option value="20000001-50000000">20 million - 50 million</option>
-                    <option value="50000001-100000000">50 million - 100 million</option>
-                    <option value="100000001-150000000">100 million - 150 million</option>
-                </select>
-            </div>
+    <!-- Script for Sign In / Sign Up functionality -->
+    <script>
+        // Selecting the sign-up and sign-in buttons
+        const signInBtn = document.querySelector("#sign-in-btn");
+        const signUpBtn = document.querySelector("#sign-up-btn");
+        const container = document.querySelector(".container");
 
-            <!-- Down Payment Dropdown -->
-            <div class="form-group">
-                <label for="downpayment">Down Payment</label>
-                <select id="downpayment" name="downpayment">
-                    <option value="">All</option>
-                    <option value="0-500000">0 million - 0.5 million</option>
-                    <option value="500000-1000000">0.5 million - 1 million</option>
-                    <option value="1000001-2000000">1 million - 2 million</option>
-                    <option value="2000001-5000000">2 million - 5 million</option>
-                    <option value="5000001-10000000">5 million - 10 million</option>
-                    <option value="10000001-15000000">10 million - 15 million</option>
-                </select>
-            </div>
+        // Adding event listeners to handle form switching
+        signUpBtn.addEventListener("click", () => {
+            container.classList.add("sign-up-mode");
+        });
 
-            <!-- Installments Dropdown -->
-            <div class="form-group">
-                <label for="installments">Installments every Q</label>
-                <select id="installments" name="installments">
-                    <option value="">All</option>
-                    <option value="0-500000">0K - 50K</option>
-                    <option value="50000-100000">50K - 100K</option>
-                    <option value="100001-150000">100K - 150K</option>
-                    <option value="150001-200000">150K - 200K</option>
-                    <option value="200001-300000">200K - 300K</option>
-                    <option value="300001-100000000000">300K - 10000000K</option>
-                </select>
-            </div>
+        signInBtn.addEventListener("click", () => {
+            container.classList.remove("sign-up-mode");
+        });
 
-            <!-- Search Button -->
-            <button type="button" id="searchButton">Search</button>
-        </form>
+        // Handling Sign Up Form Submission
+        document.getElementById("signUpForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form from submitting
 
-        <!-- Results Section -->
-        <div id="results"></div>
-    </main>
-    
+            const email = document.getElementById("email-signup").value;
+            const password = document.getElementById("password-signup").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
 
-    <footer>
-        <p>&copy; 2024 Property Broker System</p>
-    </footer>
+            // Password confirmation check
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
 
-    <script src="script.js"></script>
+            // Get existing users from localStorage or initialize an empty array
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            // Check if the email already exists
+            if (users.some((user) => user.email === email)) {
+                alert("An account with this email already exists.");
+                return;
+            }
+
+            // Save new user in localStorage
+            users.push({ email, password });
+            localStorage.setItem("users", JSON.stringify(users));
+
+            alert("Account created successfully!");
+            window.location.href = "sign-in.html"; // Redirect to Sign-In page after successful sign up
+        });
+
+        // Handling Sign In Form Submission
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form from submitting
+
+            const email = document.getElementById("email-signin").value;
+            const password = document.getElementById("password-signin").value;
+
+            // Get users from localStorage
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+
+            // Find user with matching email and password
+            const user = users.find((user) => user.email === email && user.password === password);
+
+            if (user) {
+                alert("Sign In successful!");
+                window.location.href = "main.html"; // Redirect to dashboard after successful login
+            } else {
+                alert("Invalid email or password.");
+            }
+        });
+    </script>
 </body>
 </html>
+
+
+<link rel="stylesheet" href="style.css">

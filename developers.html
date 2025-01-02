@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Broker - Photo Buttons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #6C63FF;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .go-to-main-btn {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #6C63FF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .go-to-main-btn:hover {
+            background-color: #5a54e5;
+        }
+
+        .photo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        .photo-button {
+            margin: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .photo-button img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-button:hover {
+            transform: scale(1.1);
+        }
+
+        .photo-button p {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        footer {
+            background-color: #6C63FF;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .photo-button img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .photo-button p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="main.html" class="go-to-main-btn">Go back</a>
+        Easy Broker
+    </header>
+
+    <div class="photo-container">
+        <script>
+            function goToPage(pageUrl) {
+                window.location.href = pageUrl;
+            }
+
+            // Generate 3 photo buttons dynamically (you can increase this number as needed)
+            const container = document.querySelector('.photo-container');
+            for (let i = 1; i <= 3; i++) {
+                const buttonDiv = document.createElement('div');
+                buttonDiv.className = 'photo-button';
+                buttonDiv.setAttribute('onclick', `goToPage('page${i}.html')`);
+
+                const img = document.createElement('img');
+                img.src = `photo${i}.jpg`;
+                img.alt = `Photo ${i}`;
+                buttonDiv.appendChild(img);
+
+                const paragraph = document.createElement('p');
+                buttonDiv.appendChild(paragraph);
+
+                container.appendChild(buttonDiv);
+            }
+        </script>
+    </div>
+
+    <footer>&copy; 2025 Easy Broker. All rights reserved.</footer>
+
+</body>
+</html>

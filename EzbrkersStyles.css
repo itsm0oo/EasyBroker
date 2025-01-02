@@ -205,3 +205,31 @@ select {
 #results li:last-child {
     border-bottom: none;
 }
+header {
+    background-color: #6C63FF;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+}
+
+.go-to-main-btn {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #5a54e5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.go-to-main-btn:hover {
+    background-color: #4a46d4;
+}

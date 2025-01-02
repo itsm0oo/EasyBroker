@@ -12,7 +12,15 @@
 
     <header>
         <h1>Search for Properties</h1>
+        
+        <a href="main.html" class="go-to-main-btn">Go back</a>
+        Easy Broker
+
+
+       
     </header>
+
+   
 
     <main>
         <form id="searchForm" class="search-form">
@@ -35,6 +43,7 @@
                     <option value="MV">MV</option>
                     <option value="Tatweer misr">Tatweer misr</option>
                     <option value="roya">Roya</option>
+                    <option value="PRE">PRE</option>
                 </select>
             </div>
 
@@ -47,6 +56,18 @@
                     <option value="villa">Villa</option>
                     <option value="office">Office</option>
                     <option value="store">Store</option>
+                </select>
+            </div>
+    
+            
+            <div class="form-group">
+                <label for="type">Delivary Date</label>
+                <select id="type" name="type">
+                    <option value="">All</option>
+                    <option value="RM">RM</option>
+                    <option value="1y">1y</option>
+                    <option value="2y">2y</option>
+                    <option value="3y">3y</option>
                 </select>
             </div>
 
@@ -79,7 +100,7 @@
 
             <!-- Installments Dropdown -->
             <div class="form-group">
-                <label for="installments">Installments Range</label>
+                <label for="installments">Installments every Q</label>
                 <select id="installments" name="installments">
                     <option value="">All</option>
                     <option value="0-500000">0K - 50K</option>
@@ -98,6 +119,7 @@
         <!-- Results Section -->
         <div id="results"></div>
     </main>
+    
 
     <footer>
         <p>&copy; 2024 Property Broker System</p>

@@ -32,6 +32,7 @@ function filterProperties() {
     const budgetRange = document.getElementById("budgetRange").value;
     const downpayment = document.getElementById("downpayment").value;
     const installments = document.getElementById("installments").value;
+    const DelivaryDate = document.getElementById("DelivaryDate").value;
 
     // تقسيم نطاق الميزانية إلى الحد الأدنى والحد الأقصى
     const [minBudget, maxBudget] = budgetRange ? budgetRange.split("-").map(Number) : [0, Infinity];
@@ -46,8 +47,9 @@ function filterProperties() {
         const matchesBudget = (property.budget >= minBudget && property.budget <= maxBudget);
         const matchesDownpayment = (property.downpayment >= minDownpayment && property.downpayment <= maxDownpayment);
         const matchesInstallments = (property.installments >= minInstallments && property.installments <= maxInstallments);
+        const matchesDelivaryDate = !DelivaryDate || DelivaryDate === "" || property.DelivaryDate === DelivaryDate;
 
-        return matchesLocation && matchesDeveloper && matchesType && matchesBudget && matchesDownpayment && matchesInstallments;
+        return matchesLocation && matchesDeveloper && matchesType && matchesBudget && matchesDownpayment && matchesInstallments && matchesDelivaryDate;
     });
 
     console.log(filteredProperties);  // عرض العقارات المصفاة في الكونسول

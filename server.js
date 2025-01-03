@@ -1,43 +1,83 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
 const fs = require("fs");
+const path = require("path");
 
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// مسار ملف الحسابات
-const accountsFilePath = "./accounts.txt";
+const filePath = path.join(__dirname, "data", "account.txt");
 
-// دالة للتحقق من الحساب
-function validateAccount(email, password) {
-  try {
-    const accounts = fs.readFileSync(accountsFilePath, "utf8").split("\n");
-    for (let account of accounts) {
-      const [storedEmail, storedPassword] = account.trim().split(",");
-      if (storedEmail === email && storedPassword === password) {
-        return true;
-      }
-    }
-    return false;
-  } catch (error) {
-    console.error("Error reading accounts file:", error);
-    return false;
-  }
+// Ensure the data folder exists
+if (!fs.existsSync(path.dirname(filePath))) {
+    fs.mkdirSync(path.dirname(filePath));
 }
 
-// تسجيل الدخول
-app.post("/signin", (req, res) => {
-  const { email, password } = req.body;
+// Sign Up Endpoint
+app.post("/signup", (req, res) => {
+    const { email, password } = req.body;
 
-  if (validateAccount(email, password)) {
-    res.status(200).send({ message: "Sign In successful!" });
-  } else {
-    res.status(401).send({ message: "Invalid email or password." });
-  }
+    if (!email || !password) {
+        return res.status(400).send("Email and password are required.");
+    }
+
+    // Read accounts from the file
+    fs.readFile(filePath, "utf8", (err, data) => {
+        if (err && err.code !== "ENOENT") {
+            console.error(err);
+            return res.status(500).send("Error reading account file.");
+        }
+
+        const accounts = data ? data.split("\n").filter(Boolean).map(line => JSON.parse(line)) : [];
+
+        // Check if email already exists
+        if (accounts.some(account => account.email === email)) {
+            return res.status(400).send("Account already exists with this email.");
+        }
+
+        // Append new account to file
+        const newAccount = { email, password };
+        fs.appendFile(filePath, JSON.stringify(newAccount) + "\n", err => {
+            if (err) {
+                console.error(err);
+                return res.status(500).send("Error saving account.");
+            }
+            res.status(201).send("Account created successfully!");
+        });
+    });
 });
 
-// تشغيل السيرفر
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Sign In Endpoint
+app.post("/signin", (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).send("Email and password are required.");
+    }
+
+    // Read accounts from the file
+    fs.readFile(filePath, "utf8", (err, data) => {
+        if (err && err.code !== "ENOENT") {
+            console.error(err);
+            return res.status(500).send("Error reading account file.");
+        }
+
+        const accounts = data ? data.split("\n").filter(Boolean).map(line => JSON.parse(line)) : [];
+
+        // Validate credentials
+        const account = accounts.find(acc => acc.email === email && acc.password === password);
+        if (account) {
+            res.status(200).send("Sign In successful!");
+        } else {
+            res.status(401).send("Invalid email or password.");
+        }
+    });
+});
+
+// Start the server
+const PORT = 4000;
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
+
+

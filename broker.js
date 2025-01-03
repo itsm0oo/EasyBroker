@@ -87,12 +87,44 @@ function displayResults(filteredProperties) {
             developer.textContent = `dev: ${property.developer}`;
             detailsContainer.appendChild(developer);
 
-            // Property type and location
-            const deliveryDate = document.createElement('div');
-            typeLocation.classList.add('property-location');
-            typeLocation.textContent = `${property.deliveryDate} in ${property.deliveryDate}`;
-            detailsContainer.appendChild(deliveryDate);
-
+            filteredProperties.forEach(property => {
+                const listItem = document.createElement('li');
+                
+                // Create container for property details
+                const detailsContainer = document.createElement('div');
+                detailsContainer.classList.add('property-details');
+            
+                // Property type and location
+                const typeLocation = document.createElement('div');
+                typeLocation.classList.add('property-location');
+                typeLocation.textContent = `${property.type} in ${property.location}`;
+                detailsContainer.appendChild(typeLocation);
+            
+                // Developer information
+                const developer = document.createElement('div');
+                developer.classList.add('property-developer');
+                developer.textContent = `Dev: ${property.developer}`;
+                detailsContainer.appendChild(developer);
+            
+                // Budget and price details
+                const budget = document.createElement('div');
+                budget.classList.add('property-price');
+                budget.textContent = `${property.budget} EGP`;
+                detailsContainer.appendChild(budget);
+            
+                // Delivery Date
+                const deliveryDate = document.createElement('div');
+                deliveryDate.classList.add('property-delivery-date');
+                deliveryDate.textContent = `Delivery Date: ${property.deliveryDate}`;
+                detailsContainer.appendChild(deliveryDate);
+            
+                // Append the details container to the list item
+                listItem.appendChild(detailsContainer);
+                
+                // Add the list item to the list
+                list.appendChild(listItem);
+            });
+             
             // Budget and price details
             const budget = document.createElement('div');
             budget.classList.add('property-price');

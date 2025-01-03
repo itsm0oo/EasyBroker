@@ -87,6 +87,12 @@ function displayResults(filteredProperties) {
             developer.textContent = `dev: ${property.developer}`;
             detailsContainer.appendChild(developer);
 
+            // Property type and location
+            const deliveryDate = document.createElement('div');
+            typeLocation.classList.add('property-location');
+            typeLocation.textContent = `${property.deliveryDate} in ${property.deliveryDate}`;
+            detailsContainer.appendChild(deliveryDate);
+
             // Budget and price details
             const budget = document.createElement('div');
             budget.classList.add('property-price');

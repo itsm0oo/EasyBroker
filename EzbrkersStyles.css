@@ -233,3 +233,23 @@ header {
 .go-to-main-btn:hover {
     background-color: #4a46d4;
 }
+.property-list {
+    list-style: none;
+    padding: 0;
+}
+
+.property-item {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.property-details {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.property-field {
+    width: 50%;
+    margin-bottom: 5px;
+}

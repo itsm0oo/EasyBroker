@@ -1,8 +1,8 @@
 Location,Developer,Project,type,category,Model,Floor,price,Delivary Date,Down payment,maintinance,park,phase,BUA,Garden Area,land Area,Roof area
-New Cairo,MV,MV1.1,Duplex ,I-Villa Roof Garden,iVilla Park-iVilla Roof Garden-Middle-3 BR-245,4,"23,388,840",1y,,8%,MV The Park,Phase-1M4,245,0,0,0
-New Cairo,MV,MV1.1,Duplex ,I-Villa Roof Garden,iVilla Park-iVilla Roof Garden-Middle-3 BR-245,4,"23,224,428",1y,,8%,MV The Park,Phase-1M4,245,0,0,0
-New Cairo,MV,MV1.1,Duplex ,I-Villa Roof Garden,iVilla Park-iVilla Roof Garden-Middle-3 BR-255,4,"23,406,726",1y,,8%,MV The Park,Phase-1M4,255,0,0,0
-New Cairo,MV,MV1.1,Duplex ,I-Villa Roof Garden,iVilla Park-iVilla Roof Garden-Middle-3 BR-245,4,"23,224,428",1y,,8%,MV The Park,Phase-1M4,245,0,0,0
+New Cairo,MV,MV1.1,Duplex,I-Villa Roof Garden,iVilla Park-iVilla Roof Garden-Middle-3 BR-245,4,"23,388,840",1y,,8%,MV The Park,Phase-1M4,245,0,0,0
+New Cairo,MV,MV1.1,Duplex,I-Villa Roof Garden,iVilla Park-iVilla Roof Garden-Middle-3 BR-245,4,"23,224,428",1y,,8%,MV The Park,Phase-1M4,245,0,0,0
+New Cairo,MV,MV1.1,Duplex,I-Villa Roof Garden,iVilla Park-iVilla Roof Garden-Middle-3 BR-255,4,"23,406,726",1y,,8%,MV The Park,Phase-1M4,255,0,0,0
+New Cairo,MV,MV1.1,Duplex,I-Villa Roof Garden,iVilla Park-iVilla Roof Garden-Middle-3 BR-245,4,"23,224,428",1y,,8%,MV The Park,Phase-1M4,245,0,0,0
 New Cairo,MV,MV1.1,Duplex ,I-Villa Sky Garden,iVilla Park-iVilla Sky Garden-Corner-3 BR-235,2,"29,886,260",1y,,8%,MV The Park,Phase-1M4,235,0,0,0
 New Cairo,MV,MV1.1,Duplex ,I-Villa Sky Garden,iVilla Park-iVilla Sky Garden-Middle-3 BR-240,2,"20,781,957",1y,,8%,MV The Park,Phase-1M4,240,0,0,0
 New Cairo,MV,MV1.1,Duplex ,I-Villa Roof Garden,iVilla Park-iVilla Roof Garden-Corner-3 BR-215,4,"22,696,360",1y,,8%,MV The Park,Phase-1M4,215,0,0,0
@@ -52,7 +52,7 @@ New Cairo,MV,MV1.1,Duplex ,I-Villa Roof Garden,iVilla Park-iVilla Roof Garden--3
 New Cairo,MV,MV1.1,Duplex ,I-Villa Garden,iVilla Park-iVilla Garden--3 BR-240,0,"26,782,786",1y,,8%,MV The Park,MV 1.1 12 - 2024,240,68.18,0,0
 New Cairo,MV,MV1.1,Duplex ,I-Villa Roof Garden,iVilla Park-iVilla Roof Garden--3 BR-245,4,"23,412,682",1y,,8%,MV The Park,MV 1.1 12 - 2024,245,0,0,0
 New Cairo,MV,MV1.1,Duplex ,I-Villa Roof Garden,iVilla Park-iVilla Roof Garden--3 BR-220,4,"24,203,840",1y,,8%,MV The Park,MV 1.1 12 - 2024,220,0,0,0
-,##,##,##,,##,,##,##,##,,,##,##,##,##,##
+
 October,MV,MV4,Villa,Town House,TH-134-2,,"22,869,399",1y,,8%,Zone 2,Phase 2,210,72,193.34,38.73
 October,MV,MV4,Villa,Town House,TH-134-4,,"23,238,600",1y,,8%,Zone 2,Phase 2,210,87,211.8,38.85
 October,MV,MV4,Villa,Town House,TH-134-5,,"23,469,200",1y,,8%,Zone 2,Phase 2,210,94,223.33,38.85
@@ -69,7 +69,7 @@ October,MV,MV4,Villa,Town House,TH-145-4,,"23,812,599",1y,,8%,Zone 2,Phase 2,210
 October,MV,MV4,Villa,Town House,TH-145-5,,"23,812,599",1y,,8%,Zone 2,Phase 2,210,102,222,38.85
 October,MV,MV4,Villa,Town House,TH-146-3,,"23,812,599",1y,,8%,Zone 2,Phase 2,210,102,222,38.85
 October,MV,MV4,Villa,Town House,TH-146-4,,"23,812,599",1y,,8%,Zone 2,Phase 2,210,102,222,38.85
-,,,,,,,,,,,,,,,,
+
 New Cairo,MV,aliva,Duplex ,I-Villa Roof,iV-iV-Roof-Middle-3 BR-230,3,"17,725,500",4y,,10%,Club Park,Phase-1C,230,0,0,15
 New Cairo,MV,aliva,Duplex ,I-Villa Roof,iV-iV-Roof-Middle-3 BR-230,3,"16,805,138",4y,,10%,Club Park,Phase-1C,230,0,0,15
 New Cairo,MV,aliva,Duplex ,I-Villa Garden,iV-iV-Garden-Corner-3 BR-205,0,"17,840,337",4y,,10%,Club Park,Phase-1C,205,111.97,0,0
@@ -170,7 +170,6 @@ New Cairo,MV,aliva,Duplex ,I-Villa Roof,iVGR2P-iVGrand-Roof-Corner-4 BR-255,3,"1
 New Cairo,MV,aliva,Duplex ,Roof IVilla  Lagoon View,iVGR2P-iVGrand-Roof-Corner-4 BR-255,3,"23,328,666",4y,,10%,Lagoon Park,Phase-1L,255,0,0,55
 New Cairo,MV,aliva,Duplex ,IV Beach House,iVGR2P-iVGrand-Garden-Corner-3 BR-230,0,"20,988,291",4y,,10%,Lagoon Park,Phase-1L,230,113.66,0,0
 New Cairo,MV,aliva,Duplex ,I-Villa Roof,iVGR2P-iVGrand-Roof-Corner-4 BR-255,3,"19,147,930",4y,,10%,Lagoon Park,Phase-1L,255,0,0,60
-,,,,,,,,,,,,,,,,
 October,MV,I City oct,apartment ,I-Apartment,AL-Typical-Corner-4 BR-210,1,"11,092,541",4y,,8%,Club,CD Phase-2,210,0,0,0
 November,MV,I City oct,apartment ,I-Apartment,AL-Typical-Corner-3 BR-155,2,"9,036,689",4y,,8%,Club,CD Phase-2,155,0,0,0
 December,MV,I City oct,apartment ,I-Apartment,AL-Roof-Corner-4 BR-210,4,"11,092,541",4y,,8%,Club,CD Phase-2,210,0,0,0

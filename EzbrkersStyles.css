@@ -242,38 +242,14 @@ header {
     border: 1px solid #ccc;
     margin: 10px 0;
     padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    display: flex; /* Flexbox for horizontal alignment */
-    align-items: center; /* Vertically align items */
-    gap: 20px; /* Space between items */
 }
 
 .property-details {
-    display: flex; /* Flexbox for horizontal layout */
-    flex-wrap: wrap; /* Allow wrapping if necessary */
-    width: 100%; /* Ensure the details take full width */
-    gap: 10px; /* Space between fields */
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .property-field {
-    flex: 1 1 20%; /* Make each field take up 20% of the row and wrap if necessary */
-    min-width: 150px; /* Ensure a minimum width for each field */
-    text-align: left; /* Align text to the left */
-    padding: 5px;
-    border: 1px solid #ddd; /* Optional border for fields */
-    background-color: #fff; /* Optional background color for fields */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    width: 50%;
+    margin-bottom: 5px;
 }
-
-.property-field span {
-    font-weight: bold; /* Highlight the field label */
-    display: inline-block; /* Ensure label is on the same line */
-    margin-right: 5px; /* Add spacing between label and value */
-}
-
-.property-item:hover {
-    background-color: #e8e8e8; /* Highlight on hover */
-}
-

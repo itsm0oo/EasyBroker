@@ -3,18 +3,23 @@ let properties = [];
 
 // دالة لتحميل وتحليل ملف CSV من المشروع
 function loadCSV() {
-    fetch('properties.csv')  // تحميل الملف properties.csv من المشروع
-        .then(response => response.text())  // قراءة البيانات النصية من الملف
+    fetch('properties.csv') // تحميل الملف properties.csv من المشروع
+        .then(response => response.text()) // قراءة البيانات النصية من الملف
         .then(csvData => {
-            Papa.parse(csvData, {  // استخدام مكتبة PapaParse لتحليل البيانات
+            Papa.parse(csvData, { // استخدام مكتبة PapaParse لتحليل البيانات
                 complete: function(results) {
                     console.log("CSV file loaded successfully");
-                    console.log(results.data);  // عرض البيانات في الكونسول
-                    properties = results.data;
-                    displayResults(properties);  // عرض البيانات بعد التحميل
+                    console.log(results.data); // عرض البيانات في الكونسول
+                    properties = results.data.map(property => ({
+                        ...property,
+                        budget: parseFloat(property.budget) || 0,
+                        downPayment: parseFloat(property.downPayment) || 0,
+                        installments: parseFloat(property.installments) || 0,
+                    })); // تحويل القيم الرقمية
+                    displayResults(properties); // عرض البيانات بعد التحميل
                 },
-                header: true,  // استخدام أول صف كعناوين
-                skipEmptyLines: true,  // تجاهل الأسطر الفارغة
+                header: true, // استخدام أول صف كعناوين
+                skipEmptyLines: true, // تجاهل الأسطر الفارغة
             });
         })
         .catch(error => {
@@ -26,33 +31,67 @@ function loadCSV() {
 function filterProperties() {
     console.log("Filtering properties...");
 
-    const location = document.getElementById("location").value;
-    const developer = document.getElementById("developer").value;
-    const type = document.getElementById("type").value;
-    const budgetRange = document.getElementById("budgetRange").value;
-    const downpayment = document.getElementById("downpayment").value;
-    const installments = document.getElementById("installments").value;
-    const deliveryDate = document.getElementById("deliveryDate").value;  // Corrected
+    const location = document.getElementById("location").value.trim();
+    const developer = document.getElementById("developer").value.trim();
+    const type = document.getElementById("type").value.trim();
+    const budgetRange = document.getElementById("budgetRange").value.trim();
+    const downpayment = document.getElementById("downpayment").value.trim();
+    const installments = document.getElementById("installments").value.trim();
+    const deliveryDate = document.getElementById("deliveryDate").value.trim();
 
     // تقسيم نطاق الميزانية إلى الحد الأدنى والحد الأقصى
-    const [minBudget, maxBudget] = budgetRange ? budgetRange.split("-").map(Number) : [0, Infinity];
-    const [minDownpayment, maxDownpayment] = downpayment ? downpayment.split("-").map(Number) : [0, Infinity];
-    const [minInstallments, maxInstallments] = installments ? installments.split("-").map(Number) : [0, Infinity];
+    const [minBudget, maxBudget] = budgetRange
+        ? budgetRange.split("-").map(value => parseFloat(value) || 0)
+        : [0, Infinity];
+    const [minDownpayment, maxDownpayment] = downpayment
+        ? downpayment.split("-").map(value => parseFloat(value) || 0)
+        : [0, Infinity];
+    const [minInstallments, maxInstallments] = installments
+        ? installments.split("-").map(value => parseFloat(value) || 0)
+        : [0, Infinity];
 
     // تصفية العقارات بناءً على المعايير المختارة
     const filteredProperties = properties.filter(property => {
-        const matchesLocation = !location || location === "" || property.location === location;
-        const matchesDeveloper = !developer || developer === "" || property.developer === developer;
-        const matchesType = !type || type === "" || property.type === type;
-        const matchesBudget = (property.budget >= minBudget && property.budget <= maxBudget);
-        const matchesDownpayment = (property.downpayment >= minDownpayment && property.downpayment <= maxDownpayment);
-        const matchesInstallments = (property.installments >= minInstallments && property.installments <= maxInstallments);
-        const matchesDeliveryDate = !deliveryDate || deliveryDate === "" || property.deliveryDate === deliveryDate;  // Corrected
-
-        return matchesLocation && matchesDeveloper && matchesType && matchesBudget && matchesDownpayment && matchesInstallments && matchesDeliveryDate;
+        const matchesLocation = !location || property.location === location;
+        const matchesDeveloper = !developer || property.developer === developer;
+        const matchesType = !type || property.type === type;
+        const matchesBudget = property.budget >= minBudget && property.budget <= maxBudget;
+        const matchesDownpayment = property.downPayment >= minDownpayment && property.downPayment <= maxDownpayment;
+        const matchesInstallments = property.installments >= minInstallments && property.installments <= maxInstallments;
+        const matchesDeliveryDate = !deliveryDate || property.deliveryDate === deliveryDate;
+    
+        // Additional matching criteria
+        const matchesCategory = !category || property.category === category;
+        const matchesModel = !model || property.model === model;
+        const matchesFloor = !floor || property.floor === floor;
+        const matchesPhase = !phase || property.phase === phase;
+        const matchesBUA = !minBUA || property.bua >= minBUA;
+        const matchesGardenArea = !minGardenArea || property.gardenArea >= minGardenArea;
+        const matchesLandArea = !minLandArea || property.landArea >= minLandArea;
+        const matchesRoofArea = !minRoofArea || property.roofArea >= minRoofArea;
+        const matchesParking = !parking || property.parking === parking;
+    
+        return matchesLocation &&
+            matchesDeveloper &&
+            matchesType &&
+            matchesBudget &&
+            matchesDownpayment &&
+            matchesInstallments &&
+            matchesDeliveryDate &&
+            matchesCategory &&
+            matchesModel &&
+            matchesFloor &&
+            matchesPhase &&
+            matchesBUA &&
+            matchesGardenArea &&
+            matchesLandArea &&
+            matchesRoofArea &&
+            matchesParking;
     });
+    
+    
 
-    console.log(filteredProperties);  // عرض العقارات المصفاة في الكونسول
+    console.log(filteredProperties); // عرض العقارات المصفاة في الكونسول
 
     // عرض العقارات المصفاة
     displayResults(filteredProperties);
@@ -67,123 +106,48 @@ function displayResults(filteredProperties) {
         resultsContainer.innerHTML = '<p>لا توجد عقارات بناءً على معايير البحث.</p>';
     } else {
         const list = document.createElement('ul');
-        
+        list.classList.add('property-list'); // إضافة كلاس للقائمة
+
         filteredProperties.forEach(property => {
             const listItem = document.createElement('li');
-            
-            // Create container for property details
+            listItem.classList.add('property-item'); // إضافة كلاس لكل عنصر
+
+            // إنشاء محتوى التفاصيل
             const detailsContainer = document.createElement('div');
             detailsContainer.classList.add('property-details');
-        
-            // Location
-            const location = document.createElement('div');
-            location.classList.add('property-location');
-            location.textContent = `Location: ${property.location}`;
-            detailsContainer.appendChild(location);
-        
-            // Developer
-            const developer = document.createElement('div');
-            developer.classList.add('property-developer');
-            developer.textContent = `Developer: ${property.developer}`;
-            detailsContainer.appendChild(developer);
-        
-            // Project
-            const project = document.createElement('div');
-            project.classList.add('property-project');
-            project.textContent = `Project: ${property.project || "N/A"}`;
-            detailsContainer.appendChild(project);
-        
-            // Type
-            const type = document.createElement('div');
-            type.classList.add('property-type');
-            type.textContent = `Type: ${property.type}`;
-            detailsContainer.appendChild(type);
-        
-            // Category
-            const category = document.createElement('div');
-            category.classList.add('property-category');
-            category.textContent = `Category: ${property.category || "N/A"}`;
-            detailsContainer.appendChild(category);
-        
-            // Model
-            const model = document.createElement('div');
-            model.classList.add('property-model');
-            model.textContent = `Model: ${property.model || "N/A"}`;
-            detailsContainer.appendChild(model);
-        
-            // Floor
-            const floor = document.createElement('div');
-            floor.classList.add('property-floor');
-            floor.textContent = `Floor: ${property.floor || "N/A"}`;
-            detailsContainer.appendChild(floor);
-        
-            // Price
-            const price = document.createElement('div');
-            price.classList.add('property-price');
-            price.textContent = `Price: ${property.price || "N/A"} EGP`;
-            detailsContainer.appendChild(price);
-        
-            // Delivery Date
-            const deliveryDate = document.createElement('div');
-            deliveryDate.classList.add('property-delivery-date');
-            deliveryDate.textContent = `Delivery Date: ${property.deliveryDate || "N/A"}`;
-            detailsContainer.appendChild(deliveryDate);
-        
-            // Down Payment
-            const downPayment = document.createElement('div');
-            downPayment.classList.add('property-downpayment');
-            downPayment.textContent = `Down Payment: ${property.downPayment || "N/A"} EGP`;
-            detailsContainer.appendChild(downPayment);
-        
-            // Maintenance
-            const maintenance = document.createElement('div');
-            maintenance.classList.add('property-maintenance');
-            maintenance.textContent = `Maintenance: ${property.maintenance || "N/A"}`;
-            detailsContainer.appendChild(maintenance);
-        
-            // Parking
-            const parking = document.createElement('div');
-            parking.classList.add('property-parking');
-            parking.textContent = `Parking: ${property.parking || "N/A"}`;
-            detailsContainer.appendChild(parking);
-        
-            // Phase
-            const phase = document.createElement('div');
-            phase.classList.add('property-phase');
-            phase.textContent = `Phase: ${property.phase || "N/A"}`;
-            detailsContainer.appendChild(phase);
-        
-            // BUA
-            const bua = document.createElement('div');
-            bua.classList.add('property-bua');
-            bua.textContent = `BUA: ${property.bua || "N/A"} sqm`;
-            detailsContainer.appendChild(bua);
-        
-            // Garden Area
-            const gardenArea = document.createElement('div');
-            gardenArea.classList.add('property-garden-area');
-            gardenArea.textContent = `Garden Area: ${property.gardenArea || "N/A"} sqm`;
-            detailsContainer.appendChild(gardenArea);
-        
-            // Land Area
-            const landArea = document.createElement('div');
-            landArea.classList.add('property-land-area');
-            landArea.textContent = `Land Area: ${property.landArea || "N/A"} sqm`;
-            detailsContainer.appendChild(landArea);
-        
-            // Roof Area
-            const roofArea = document.createElement('div');
-            roofArea.classList.add('property-roof-area');
-            roofArea.textContent = `Roof Area: ${property.roofArea || "N/A"} sqm`;
-            detailsContainer.appendChild(roofArea);
-        
-            // Append the details container to the list item
+
+            // الحقول المطلوبة
+            const fields = [
+                { label: "Location", value: property.location },
+                { label: "Developer", value: property.developer },
+                { label: "Project", value: property.project || "N/A" },
+                { label: "Type", value: property.type },
+                { label: "Category", value: property.category || "N/A" },
+                { label: "Model", value: property.model || "N/A" },
+                { label: "Floor", value: property.floor || "N/A" },
+                { label: "Price", value: `${property.budget || "N/A"} EGP` },
+                { label: "Delivery Date", value: property.deliveryDate || "N/A" },
+                { label: "Down Payment", value: `${property.downPayment || "N/A"} EGP` },
+                { label: "Maintenance", value: property.maintenance || "N/A" },
+                { label: "Parking", value: property.parking || "N/A" },
+                { label: "Phase", value: property.phase || "N/A" },
+                { label: "BUA", value: `${property.bua || "N/A"} sqm` },
+                { label: "Garden Area", value: `${property.gardenArea || "N/A"} sqm` },
+                { label: "Land Area", value: `${property.landArea || "N/A"} sqm` },
+                { label: "Roof Area", value: `${property.roofArea || "N/A"} sqm` },
+            ];
+
+            // عرض كل الحقول
+            fields.forEach(field => {
+                const fieldDiv = document.createElement('div');
+                fieldDiv.classList.add('property-field');
+                fieldDiv.textContent = `${field.label}: ${field.value}`;
+                detailsContainer.appendChild(fieldDiv);
+            });
+
             listItem.appendChild(detailsContainer);
-            
-            // Add the list item to the list
             list.appendChild(listItem);
         });
-        
 
         resultsContainer.appendChild(list);
     }
@@ -194,5 +158,5 @@ document.getElementById("searchButton").addEventListener("click", filterProperti
 
 // تحميل ملف CSV تلقائيًا عند تحميل الصفحة
 document.addEventListener("DOMContentLoaded", function() {
-    loadCSV();  // تحميل البيانات من ملف properties.csv
+    loadCSV(); // تحميل البيانات من ملف properties.csv
 });

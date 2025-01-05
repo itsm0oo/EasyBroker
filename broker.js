@@ -146,15 +146,15 @@ function displayResults(filteredProperties) {
                 { label: "Model", value: property.model || "N/A" },
                 { label: "Floor", value: property.floor || "N/A" },
                 { label: "Price", value: `${property.budget || "N/A"} EGP` },
-                { label: "Delivery Date", value: property.deliveryDate || "N/A" },
-                { label: "Down Payment", value: `${property.downPayment || "N/A"} EGP` },
+                { label: "DeliveryDate", value: property.deliveryDate || "N/A" },
+                { label: "DownPayment", value: `${property.downPayment || "N/A"} EGP` },
                 { label: "Maintenance", value: property.maintenance || "N/A" },
                 { label: "Parking", value: property.parking || "N/A" },
                 { label: "Phase", value: property.phase || "N/A" },
                 { label: "BUA", value: `${property.bua || "N/A"} sqm` },
-                { label: "Garden Area", value: `${property.gardenArea || "N/A"} sqm` },
-                { label: "Land Area", value: `${property.landArea || "N/A"} sqm` },
-                { label: "Roof Area", value: `${property.roofArea || "N/A"} sqm` },
+                { label: "GardenArea", value: `${property.gardenArea || "N/A"} sqm` },
+                { label: "LandArea", value: `${property.landArea || "N/A"} sqm` },
+                { label: "RoofArea", value: `${property.roofArea || "N/A"} sqm` },
             ];
 
             // عرض كل الحقول

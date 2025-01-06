@@ -1,13 +1,13 @@
 /* Global styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #000000;
     margin: 0;
     padding: 0;
 }
 
 header, footer {
-    background-color: #6C63FF;
+    background-color: #d67316;
     color: white;
     padding: 10px 0;
     text-align: center;
@@ -72,14 +72,14 @@ input[type="number"], select, button {
 
 /* Styling the submit button */
 button {
-    background-color: #6C63FF;
+    background-color: #d67316;
     color: rgb(255, 255, 255);
     cursor: pointer;
     width: 100%; /* Make the submit button take full width */
 }
 
 button:hover {
-    background-color: #6C63FF;
+    background-color: #d67316;
 }
 
 /* Results section styling */
@@ -144,7 +144,7 @@ select {
 .sign-in-btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #6C63FF;
+    background-color: #d67316;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -152,14 +152,14 @@ select {
 }
 
 .sign-in-btn:hover {
-    background-color: #6C63FF;
+    background-color: #d67316;
 }
 
 /* Add Property Button Styling */
 .add-property-btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #6C63FF;
+    background-color: #d67316;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -167,7 +167,7 @@ select {
 }
 
 .add-property-btn:hover {
-    background-color: #6C63FF;
+    background-color: #d67316;
 }
 
 /* Additional Styling for Search Results */
@@ -206,7 +206,7 @@ select {
     border-bottom: none;
 }
 header {
-    background-color: #6C63FF;
+    background-color: #d67316;
     color: white;
     padding: 20px;
     text-align: center;
@@ -222,7 +222,7 @@ header {
     transform: translateY(-50%);
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #5a54e5;
+    background-color: #d67316;
     color: white;
     border: none;
     border-radius: 8px;
@@ -231,7 +231,7 @@ header {
 }
 
 .go-to-main-btn:hover {
-    background-color: #4a46d4;
+    background-color: #d67316;
 }
 .property-list {
     list-style: none;

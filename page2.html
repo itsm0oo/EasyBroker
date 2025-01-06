@@ -26,9 +26,9 @@
         }
         #toolbar {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            background: #333;
+            background: #4a46d4;
             color: white;
             padding: 10px;
         }
@@ -39,19 +39,28 @@
             cursor: pointer;
             border: none;
             border-radius: 3px;
-            background-color: #555;
+            background-color: #4a46d4;
             color: #fff;
         }
         #toolbar button:hover {
-            background-color: #777;
+            background-color: #5854d3;
+        }
+        #backButton {
+            background-color: #ff4c4c;
+        }
+        #backButton:hover {
+            background-color: #ff6666;
         }
     </style>
 </head>
 <body>
     <div id="toolbar">
-        <button id="zoomIn">Zoom In</button>
-        <button id="zoomOut">Zoom Out</button>
-        <span>Page: <span id="pageNumber">1</span> / <span id="pageCount">1</span></span>
+        <button id="backButton">Go Back</button>
+        <div>
+            <button id="zoomIn">Zoom In</button>
+            <button id="zoomOut">Zoom Out</button>
+            <span>Page: <span id="pageNumber">1</span> / <span id="pageCount">1</span></span>
+        </div>
     </div>
     <div id="pdfContainer"></div>
 
@@ -112,6 +121,11 @@
                 scale -= 0.2; // Decrease zoom
                 renderAllPages();
             }
+        });
+
+        // Go Back button functionality
+        document.getElementById('backButton').addEventListener('click', function () {
+            window.history.back(); // Navigates to the previous page
         });
     </script>
 </body>

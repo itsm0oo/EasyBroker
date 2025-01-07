@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Properties Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .filter {
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Properties Dashboard</h1>
+
+    <!-- Filters -->
+    <div class="filters">
+        <div class="filter">
+            <label for="location">Location:</label>
+            <select id="location">
+                <option value="">All</option>
+            </select>
+        </div>
+        <div class="filter">
+            <label for="developer">Developer:</label>
+            <select id="developer">
+                <option value="">All</option>
+            </select>
+        </div>
+        <!-- Add more filters as needed -->
+    </div>
+
+    <!-- Result Box -->
+    <div id="results">
+        <table>
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>Developer</th>
+                    <th>Project</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <!-- Add more columns -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be injected dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include JavaScript files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <script src="dashboard.js"></script> <!-- Connects to your JS file -->
+</body>
+</html>

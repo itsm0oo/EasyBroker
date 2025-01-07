@@ -3,33 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real Estate Filter</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Property Search</title>
+    <style>
+        /* Add your styles here (same as provided) */
+    </style>
 </head>
 <body>
-    <h1>فلتر الوحدات العقارية</h1>
+    <header>
+        <a href="main.html">Go Back</a>
+        <h1>Search for Properties</h1>
+    </header>
 
-    <input type="file" id="fileInput" />
-    
-    <div>
-        <label for="locationFilter">Location:</label>
-        <select id="locationFilter">
-            <option value="all">All</option>
-        </select>
-    </div>
+    <main>
+        <div class="search-container">
+            <form id="searchForm" class="search-form">
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <select id="location" name="location">
+                        <option value="">All</option>
+                        <option value="sahel">Sahel</option>
+                        <option value="new_cairo">New Cairo</option>
+                        <option value="october">October</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="developer">Developer</label>
+                    <select id="developer" name="developer">
+                        <option value="">All</option>
+                        <option value="MV">MV</option>
+                        <option value="Tatweer Misr">Tatweer Misr</option>
+                        <option value="Roya">Roya</option>
+                        <option value="PRE">PRE</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="type">Property Type</label>
+                    <select id="type" name="type">
+                        <option value="">All</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="villa">Villa</option>
+                        <option value="office">Office</option>
+                        <option value="store">Store</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="deliveryDate">Delivery Date</label>
+                    <select id="deliveryDate" name="deliveryDate">
+                        <option value="">All</option>
+                        <option value="RM">Ready to Move</option>
+                        <option value="1y">1Year</option>
+                        <option value="2y">2Years</option>
+                        <option value="3y">3Years</option>
+                        <option value="4y">4Years</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="budgetRange">Budget Range (EGP)</label>
+                    <select id="budgetRange" name="budgetRange">
+                        <option value="">All</option>
+                        <option value="5000000-10000000">5M - 10M</option>
+                        <option value="10000001-20000000">10M - 20M</option>
+                        <option value="20000001-50000000">20M - 50M</option>
+                        <option value="50000001-100000000">50M - 100M</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="downpayment">Down Payment (EGP)</label>
+                    <select id="downpayment" name="downpayment">
+                        <option value="">All</option>
+                        <option value="0-500000">0 - 500K</option>
+                        <option value="500000-1000000">500K - 1M</option>
+                        <option value="1000001-2000000">1M - 2M</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="installments">Installments Range (EGP)</label>
+                    <select id="installments" name="installments">
+                        <option value="">All</option>
+                        <option value="0-50000">0 - 50K</option>
+                        <option value="50000-100000">50K - 100K</option>
+                    </select>
+                </div>
+                <button type="button" id="searchButton">Search</button>
+            </form>
+            <div id="results">
+                <p>Results will appear here.</p>
+            </div>
+        </div>
+    </main>
 
-    <div>
-        <label for="developerFilter">Developer:</label>
-        <select id="developerFilter">
-            <option value="all">All</option>
-        </select>
-    </div>
+    <footer>
+        &copy; 2025 Property Broker System
+    </footer>
 
-    <div id="results">
-        <!-- Here filtered data will be displayed -->
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

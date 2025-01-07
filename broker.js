@@ -18,8 +18,8 @@ function loadCSV() {
                         category: property.Category?.trim() || "N/A",
                         model: property.Model?.trim() || "N/A",
                         floor: property.Floor?.trim() || "N/A",
-                        budget: parseFloat(property.Price).replace || 0,
-                        downPayment: parseFloat(property.DownPayment) || 0,
+                        budget: parseFloat(property.Price.replace(/,/g, '') || 0), // التأكد من إزالة الفواصل
+                        downPayment: parseFloat(property.DownPayment.replace(/,/g, '') || 0),
                         installments: parseFloat(property.Installments?.replace(/,/g, '') || 0),
                         deliveryDate: property.DeliveryDate?.trim() || "N/A",
                         maintenance: property.Maintenance?.trim() || "N/A",
@@ -31,7 +31,9 @@ function loadCSV() {
                         roofArea: parseFloat(property.RoofArea) || 0,
                     }));
                     console.log("Mapped Properties:", properties); // عرض العقارات المهيأة
-                    displayResults(properties); // عرض البيانات بعد التحميل
+                    
+                    // عرض جميع البيانات فور تحميل الملف
+                    displayResults(properties);
                 },
                 header: true, // استخدام أول صف كعناوين
                 skipEmptyLines: true, // تجاهل الأسطر الفارغة
@@ -41,6 +43,7 @@ function loadCSV() {
             console.error("Error loading CSV file:", error);
         });
 }
+
 
 // دالة لتصفية العقارات بناءً على المعايير المختارة
 function filterProperties() {

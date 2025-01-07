@@ -1,94 +1,96 @@
-let properties = [];
+document.getElementById('fileInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        parseCSV(file);
+    }
+});
 
-function loadCSV() {
-    fetch('properties.csv')
-        .then(response => response.text())
-        .then(csvData => {
-            Papa.parse(csvData, {
-                complete: function(results) {
-                    properties = results.data.map(property => ({
-                        location: property.Location?.trim() || "N/A",
-                        developer: property.Developer?.trim() || "N/A",
-                        project: property.Project?.trim() || "N/A",
-                        type: property.Type?.trim() || "N/A",
-                        category: property.Category?.trim() || "N/A",
-                        model: property.Model?.trim() || "N/A",
-                        floor: property.Floor?.trim() || "N/A",
-                        price: parseFloat(property.Price?.replace(/,/g, '')) || 0,
-                        deliveryDate: property.DeliveryDate?.trim() || "N/A",
-                        downpayment: parseFloat(property["Down payment"]?.replace(/,/g, '')) || 0,
-                        installments: parseFloat(property.Installments?.replace(/,/g, '')) || 0,
-                        maintenance: property.Maintinance?.trim() || "N/A",
-                        phase: property.Phase?.trim() || "N/A",
-                        bua: parseFloat(property.BUA?.replace(/,/g, '')) || 0,
-                        gardenArea: parseFloat(property["Garden Area"]?.replace(/,/g, '')) || 0,
-                        landArea: parseFloat(property["LandArea"]?.replace(/,/g, '')) || 0,
-                        roofArea: parseFloat(property["RoofArea"]?.replace(/,/g, '')) || 0,
-                        parking: property.Parking?.trim() || "N/A",
-                    }));
-                    displayResults(properties);
-                },
-                header: true,
-                skipEmptyLines: true,
-            });
-        })
-        .catch(error => console.error("Error loading CSV:", error));
+function parseCSV(file) {
+    Papa.parse(file, {
+        complete: function(results) {
+            console.log(results);
+            const data = results.data;
+            loadFilters(data);
+            displayData(data);
+        }
+    });
 }
 
-function filterProperties() {
-    const location = document.getElementById("location").value.toLowerCase().trim();
-    const developer = document.getElementById("developer").value.toLowerCase().trim();
-    const type = document.getElementById("type").value.toLowerCase().trim();
-    const deliveryDate = document.getElementById("deliveryDate").value.toLowerCase().trim();
-    const budgetRange = document.getElementById("budgetRange").value.trim();
-    const downpayment = document.getElementById("downpayment").value.trim();
-
-    let filtered = properties;
-
-    // Apply filters
-    if (location && location !== "all") {
-        filtered = filtered.filter(p => p.location.toLowerCase() === location);
-    }
-    if (developer && developer !== "all") {
-        filtered = filtered.filter(p => p.developer.toLowerCase() === developer);
-    }
-    if (type && type !== "all") {
-        filtered = filtered.filter(p => p.type.toLowerCase() === type);
-    }
-    if (deliveryDate && deliveryDate !== "all") {
-        filtered = filtered.filter(p => p.deliveryDate.toLowerCase() === deliveryDate);
-    }
-
-    // Handle budget range filter
-    if (budgetRange && budgetRange !== "all") {
-        const [min, max] = budgetRange.split('-').map(Number);
-        filtered = filtered.filter(p => p.price >= min && p.price <= max);
-    }
-
-    // Handle downpayment filter
-    if (downpayment && downpayment !== "all") {
-        const [min, max] = downpayment.split('-').map(Number);
-        filtered = filtered.filter(p => p.downpayment >= min && p.downpayment <= max);
-    }
-
-    displayResults(filtered);
+function loadFilters(data) {
+    const locationFilter = document.getElementById('locationFilter');
+    const developerFilter = document.getElementById('developerFilter');
+    
+    // Get unique values for location and developer
+    const locations = [...new Set(data.map(item => item[0]))];
+    const developers = [...new Set(data.map(item => item[1]))];
+    
+    // Add options to the location filter
+    locations.forEach(location => {
+        const option = document.createElement('option');
+        option.value = location;
+        option.text = location;
+        locationFilter.appendChild(option);
+    });
+    
+    // Add options to the developer filter
+    developers.forEach(developer => {
+        const option = document.createElement('option');
+        option.value = developer;
+        option.text = developer;
+        developerFilter.appendChild(option);
+    });
+    
+    locationFilter.addEventListener('change', filterData);
+    developerFilter.addEventListener('change', filterData);
 }
 
-function displayResults(filteredProperties) {
-    const results = document.getElementById("results");
-    if (filteredProperties.length === 0) {
-        results.innerHTML = "<p>No results found.</p>";
-    } else {
-        results.innerHTML = filteredProperties.map(p => {
-            return `
-                <p>
-                    Location: ${p.location}, Developer: ${p.developer}, Type: ${p.type}, Price: ${p.price}, Delivery Date: ${p.deliveryDate}, 
-                    Down Payment: ${p.downpayment}, BUA: ${p.bua}, Garden Area: ${p.gardenArea}, Land Area: ${p.landArea}, Roof Area: ${p.roofArea}
-                </p>
-            `;
-        }).join('');
-    }
+function filterData() {
+    const locationFilter = document.getElementById('locationFilter').value;
+    const developerFilter = document.getElementById('developerFilter').value;
+    
+    // Get all data again from PapaParse
+    Papa.parse(document.getElementById('fileInput').files[0], {
+        complete: function(results) {
+            let filteredData = results.data;
+            
+            if (locationFilter !== 'all') {
+                filteredData = filteredData.filter(item => item[0] === locationFilter);
+            }
+            
+            if (developerFilter !== 'all') {
+                filteredData = filteredData.filter(item => item[1] === developerFilter);
+            }
+            
+            displayData(filteredData);
+        }
+    });
 }
 
-document.addEventListener("DOMContentLoaded", loadCSV);
-document.getElementById("searchButton").addEventListener("click", filterProperties);
+function displayData(data) {
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = '';
+    
+    const table = document.createElement('table');
+    const headerRow = document.createElement('tr');
+    const headers = ['Location', 'Developer', 'Project', 'Type', 'Category', 'Model', 'Floor', 'Price', 'Delivery Date', 'Down Payment', 'Installments', 'Maintenance', 'Phase', 'BUA', 'Garden Area', 'Land Area', 'Roof Area', 'Parking'];
+    
+    headers.forEach(header => {
+        const th = document.createElement('th');
+        th.textContent = header;
+        headerRow.appendChild(th);
+    });
+    
+    table.appendChild(headerRow);
+    
+    data.forEach(item => {
+        const row = document.createElement('tr');
+        item.forEach(cell => {
+            const td = document.createElement('td');
+            td.textContent = cell;
+            row.appendChild(td);
+        });
+        table.appendChild(row);
+    });
+    
+    resultsDiv.appendChild(table);
+}

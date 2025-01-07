@@ -1,12 +1,11 @@
+<!-- HTML file -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="EzbrkersStyles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Property Search</title>
-    <style>
-        /* Add your styles here (same as provided) */
-    </style>
 </head>
 <body>
     <header>
@@ -17,6 +16,7 @@
     <main>
         <div class="search-container">
             <form id="searchForm" class="search-form">
+                <!-- Location Filter -->
                 <div class="form-group">
                     <label for="location">Location</label>
                     <select id="location" name="location">
@@ -26,6 +26,8 @@
                         <option value="october">October</option>
                     </select>
                 </div>
+                
+                <!-- Developer Filter -->
                 <div class="form-group">
                     <label for="developer">Developer</label>
                     <select id="developer" name="developer">
@@ -36,6 +38,8 @@
                         <option value="PRE">PRE</option>
                     </select>
                 </div>
+
+                <!-- Property Type Filter -->
                 <div class="form-group">
                     <label for="type">Property Type</label>
                     <select id="type" name="type">
@@ -46,17 +50,21 @@
                         <option value="store">Store</option>
                     </select>
                 </div>
+
+                <!-- Delivery Date Filter -->
                 <div class="form-group">
                     <label for="deliveryDate">Delivery Date</label>
                     <select id="deliveryDate" name="deliveryDate">
                         <option value="">All</option>
                         <option value="RM">Ready to Move</option>
-                        <option value="1y">1Year</option>
-                        <option value="2y">2Years</option>
-                        <option value="3y">3Years</option>
-                        <option value="4y">4Years</option>
+                        <option value="1y">1 Year</option>
+                        <option value="2y">2 Years</option>
+                        <option value="3y">3 Years</option>
+                        <option value="4y">4 Years</option>
                     </select>
                 </div>
+
+                <!-- Budget Range Filter -->
                 <div class="form-group">
                     <label for="budgetRange">Budget Range (EGP)</label>
                     <select id="budgetRange" name="budgetRange">
@@ -67,6 +75,8 @@
                         <option value="50000001-100000000">50M - 100M</option>
                     </select>
                 </div>
+
+                <!-- Down Payment Filter -->
                 <div class="form-group">
                     <label for="downpayment">Down Payment (EGP)</label>
                     <select id="downpayment" name="downpayment">
@@ -76,6 +86,8 @@
                         <option value="1000001-2000000">1M - 2M</option>
                     </select>
                 </div>
+
+                <!-- Installments Filter -->
                 <div class="form-group">
                     <label for="installments">Installments Range (EGP)</label>
                     <select id="installments" name="installments">
@@ -84,8 +96,10 @@
                         <option value="50000-100000">50K - 100K</option>
                     </select>
                 </div>
+
                 <button type="button" id="searchButton">Search</button>
             </form>
+
             <div id="results">
                 <p>Results will appear here.</p>
             </div>
@@ -96,6 +110,6 @@
         &copy; 2025 Property Broker System
     </footer>
 
-    <script src="broker.js"></script>
+    <script src="search.js"></script>
 </body>
 </html>

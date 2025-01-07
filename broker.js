@@ -9,31 +9,14 @@ function loadCSV() {
             Papa.parse(csvData, { // استخدام مكتبة PapaParse لتحليل البيانات
                 complete: function(results) {
                     console.log("CSV file loaded successfully");
-                    console.log("Raw Data:", results.data); // عرض البيانات الخام في الكونسول
+                    console.log(results.data); // عرض البيانات في الكونسول
                     properties = results.data.map(property => ({
-                        location: property.Location?.trim() || "N/A",
-                        developer: property.Developer?.trim() || "N/A",
-                        project: property.Project?.trim() || "N/A",
-                        type: property.Type?.trim() || "N/A",
-                        category: property.Category?.trim() || "N/A",
-                        model: property.Model?.trim() || "N/A",
-                        floor: property.Floor?.trim() || "N/A",
-                        budget: parseFloat(property.Price.replace(/,/g, '') || 0), // التأكد من إزالة الفواصل
-                        downPayment: parseFloat(property.DownPayment.replace(/,/g, '') || 0),
-                        installments: parseFloat(property.Installments?.replace(/,/g, '') || 0),
-                        deliveryDate: property.DeliveryDate?.trim() || "N/A",
-                        maintenance: property.Maintenance?.trim() || "N/A",
-                        parking: property.Parking?.trim() || "N/A",
-                        phase: property.Phase?.trim() || "N/A",
-                        bua: parseFloat(property.BUA) || 0,
-                        gardenArea: parseFloat(property.GardenArea) || 0,
-                        landArea: parseFloat(property.LandArea) || 0,
-                        roofArea: parseFloat(property.RoofArea) || 0,
-                    }));
-                    console.log("Mapped Properties:", properties); // عرض العقارات المهيأة
-                    
-                    // عرض جميع البيانات فور تحميل الملف
-                    displayResults(properties);
+                        ...property,
+                        budget: parseFloat(property.budget) || 0,
+                        downPayment: parseFloat(property.downPayment) || 0,
+                        installments: parseFloat(property.installments) || 0,
+                    })); // تحويل القيم الرقمية
+                    displayResults(properties); // عرض البيانات بعد التحميل
                 },
                 header: true, // استخدام أول صف كعناوين
                 skipEmptyLines: true, // تجاهل الأسطر الفارغة
@@ -44,27 +27,17 @@ function loadCSV() {
         });
 }
 
-
 // دالة لتصفية العقارات بناءً على المعايير المختارة
 function filterProperties() {
     console.log("Filtering properties...");
 
-    const location = document.getElementById("location")?.value.trim() || "";
-    const developer = document.getElementById("developer")?.value.trim() || "";
-    const Type = document.getElementById("type")?.value.trim() || "";
-    const budgetRange = document.getElementById("budgetRange")?.value.trim() || "";
-    const downpayment = document.getElementById("downpayment")?.value.trim() || "";
-    const installments = document.getElementById("installments")?.value.trim() || "";
-    const deliveryDate = document.getElementById("deliveryDate")?.value.trim() || "";
-    const category = document.getElementById("category")?.value.trim() || "";
-    const model = document.getElementById("model")?.value.trim() || "";
-    const floor = document.getElementById("floor")?.value.trim() || "";
-    const phase = document.getElementById("phase")?.value.trim() || "";
-    const minBUA = parseFloat(document.getElementById("minBUA")?.value.trim()) || 0;
-    const minGardenArea = parseFloat(document.getElementById("minGardenArea")?.value.trim()) || 0;
-    const minLandArea = parseFloat(document.getElementById("minLandArea")?.value.trim()) || 0;
-    const minRoofArea = parseFloat(document.getElementById("minRoofArea")?.value.trim()) || 0;
-    const parking = document.getElementById("parking")?.value.trim() || "";
+    const location = document.getElementById("location").value.trim();
+    const developer = document.getElementById("developer").value.trim();
+    const type = document.getElementById("type").value.trim();
+    const budgetRange = document.getElementById("budgetRange").value.trim();
+    const downpayment = document.getElementById("downpayment").value.trim();
+    const installments = document.getElementById("installments").value.trim();
+    const deliveryDate = document.getElementById("deliveryDate").value.trim();
 
     // تقسيم نطاق الميزانية إلى الحد الأدنى والحد الأقصى
     const [minBudget, maxBudget] = budgetRange
@@ -81,20 +54,11 @@ function filterProperties() {
     const filteredProperties = properties.filter(property => {
         const matchesLocation = !location || property.location === location;
         const matchesDeveloper = !developer || property.developer === developer;
-        const matchesType = !Type || property.type === Type;
+        const matchesType = !type || property.type === type;
         const matchesBudget = property.budget >= minBudget && property.budget <= maxBudget;
         const matchesDownpayment = property.downPayment >= minDownpayment && property.downPayment <= maxDownpayment;
         const matchesInstallments = property.installments >= minInstallments && property.installments <= maxInstallments;
         const matchesDeliveryDate = !deliveryDate || property.deliveryDate === deliveryDate;
-        const matchesCategory = !category || property.category === category;
-        const matchesModel = !model || property.model === model;
-        const matchesFloor = !floor || property.floor === floor;
-        const matchesPhase = !phase || property.phase === phase;
-        const matchesBUA = property.bua >= minBUA;
-        const matchesGardenArea = property.gardenArea >= minGardenArea;
-        const matchesLandArea = property.landArea >= minLandArea;
-        const matchesRoofArea = property.roofArea >= minRoofArea;
-        const matchesParking = !parking || property.parking === parking;
 
         return matchesLocation &&
             matchesDeveloper &&
@@ -102,19 +66,10 @@ function filterProperties() {
             matchesBudget &&
             matchesDownpayment &&
             matchesInstallments &&
-            matchesDeliveryDate &&
-            matchesCategory &&
-            matchesModel &&
-            matchesFloor &&
-            matchesPhase &&
-            matchesBUA &&
-            matchesGardenArea &&
-            matchesLandArea &&
-            matchesRoofArea &&
-            matchesParking;
+            matchesDeliveryDate;
     });
 
-    console.log("Filtered Properties:", filteredProperties); // عرض العقارات المصفاة في الكونسول
+    console.log(filteredProperties); // عرض العقارات المصفاة في الكونسول
 
     // عرض العقارات المصفاة
     displayResults(filteredProperties);
@@ -139,7 +94,7 @@ function displayResults(filteredProperties) {
             const detailsContainer = document.createElement('div');
             detailsContainer.classList.add('property-details');
 
-            // عرض البيانات بالشكل اللي طلبته
+            // الحقول المطلوبة
             const fields = [
                 { label: "Location", value: property.location },
                 { label: "Developer", value: property.developer },
@@ -148,17 +103,16 @@ function displayResults(filteredProperties) {
                 { label: "Category", value: property.category || "N/A" },
                 { label: "Model", value: property.model || "N/A" },
                 { label: "Floor", value: property.floor || "N/A" },
-                { label: "Price", value: `${property.budget ? property.budget.toLocaleString() : "N/A"} EGP` },
+                { label: "Price", value: `${property.budget || "N/A"} EGP` },
                 { label: "Delivery Date", value: property.deliveryDate || "N/A" },
-                { label: "Down Payment", value: `${property.downPayment ? property.downPayment.toLocaleString() : "N/A"} EGP` },
-                { label: "Installments", value: property.installments ? property.installments.toLocaleString() : "N/A" },
+                { label: "Down Payment", value: `${property.downPayment || "N/A"} EGP` },
                 { label: "Maintenance", value: property.maintenance || "N/A" },
+                { label: "Parking", value: property.parking || "N/A" },
                 { label: "Phase", value: property.phase || "N/A" },
                 { label: "BUA", value: `${property.bua || "N/A"} sqm` },
                 { label: "Garden Area", value: `${property.gardenArea || "N/A"} sqm` },
                 { label: "Land Area", value: `${property.landArea || "N/A"} sqm` },
                 { label: "Roof Area", value: `${property.roofArea || "N/A"} sqm` },
-                { label: "Parking", value: property.parking || "N/A" },
             ];
 
             // عرض كل الحقول

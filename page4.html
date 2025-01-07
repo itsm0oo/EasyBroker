@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full-Screen PDF Viewer</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <title>Photo Viewer</title>
     <style>
         body {
             margin: 0;
@@ -13,22 +12,24 @@
             flex-direction: column;
             height: 100vh;
         }
-        #pdfContainer {
+        #photoContainer {
             overflow-y: auto;
             flex: 1;
-            background: #f0f0f0;
+            background: #000000;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        #pdfContainer canvas {
+        #photoContainer img {
+            max-width: 100%;
             margin: 10px 0;
+            object-fit: cover;
         }
         #toolbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #4a46d4;
+            background: #000000;
             color: white;
             padding: 10px;
         }
@@ -39,11 +40,11 @@
             cursor: pointer;
             border: none;
             border-radius: 3px;
-            background-color: #4a46d4;
+            background-color: #d67316;
             color: #fff;
         }
         #toolbar button:hover {
-            background-color: #5854d3;
+            background-color: #000000;
         }
         #backButton {
             background-color: #ff4c4c;
@@ -59,72 +60,47 @@
         <div>
             <button id="zoomIn">Zoom In</button>
             <button id="zoomOut">Zoom Out</button>
-            <span>Page: <span id="pageNumber">1</span> / <span id="pageCount">1</span></span>
         </div>
     </div>
-    <div id="pdfContainer"></div>
+    <div id="photoContainer"></div>
 
+    
     <script>
-        const url = 'Roya_history.pdf'; // Replace with your PDF file path
+        // Hardcoded photo URLs (replace with your actual file paths)
+        const photoList = Array.from({ length: 20 }, (_, i) => `Roya_history/photo${i + 1}.jpg`);
+        
+        const photoContainer = document.getElementById("photoContainer");
+        let scale = 1; // Default scale for zoom
 
-        let pdfDoc = null;
-        let scale = 1.5; // Default zoom scale
-        let currentPage = 1;
-        const pdfContainer = document.getElementById('pdfContainer');
-
-        // Load the PDF document
-        pdfjsLib.getDocument(url).promise.then(function (pdfDoc_) {
-            pdfDoc = pdfDoc_;
-            document.getElementById('pageCount').textContent = pdfDoc.numPages;
-
-            renderAllPages();
-        });
-
-        // Function to render all pages
-        function renderAllPages() {
-            pdfContainer.innerHTML = ''; // Clear previous content
-            for (let i = 1; i <= pdfDoc.numPages; i++) {
-                renderPage(i);
-            }
-        }
-
-        // Render a single page
-        function renderPage(pageNum) {
-            pdfDoc.getPage(pageNum).then(function (page) {
-                const viewport = page.getViewport({ scale: scale });
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-
-                const renderContext = {
-                    canvasContext: ctx,
-                    viewport: viewport,
-                };
-
-                pdfContainer.appendChild(canvas);
-
-                page.render(renderContext).promise.then(function () {
-                    console.log(`Page ${pageNum} rendered.`);
-                });
+        // Function to render photos
+        function renderPhotos() {
+            photoContainer.innerHTML = ""; // Clear previous content
+            photoList.forEach(photo => {
+                const img = document.createElement("img");
+                img.src = photo; // Use photo name directly as src
+                img.style.transform = `scale(${scale})`;
+                photoContainer.appendChild(img);
             });
         }
 
+        // Initial render of photos
+        renderPhotos();
+
         // Zoom controls
-        document.getElementById('zoomIn').addEventListener('click', function () {
+        document.getElementById("zoomIn").addEventListener("click", function () {
             scale += 0.2; // Increase zoom
-            renderAllPages();
+            renderPhotos();
         });
 
-        document.getElementById('zoomOut').addEventListener('click', function () {
+        document.getElementById("zoomOut").addEventListener("click", function () {
             if (scale > 0.5) {
                 scale -= 0.2; // Decrease zoom
-                renderAllPages();
+                renderPhotos();
             }
         });
 
         // Go Back button functionality
-        document.getElementById('backButton').addEventListener('click', function () {
+        document.getElementById("backButton").addEventListener("click", function () {
             window.history.back(); // Navigates to the previous page
         });
     </script>

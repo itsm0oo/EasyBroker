@@ -4,121 +4,225 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Property Search</title>
-    <link rel="stylesheet" href="EzbrkersStyles.css">
-    <script src="broker.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #6C63FF, #9D6FFF);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 20px;
+            width: 100%;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        header a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #FFD700;
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        header a:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .search-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1200px;
+            gap: 20px;
+        }
+
+        .search-form {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            flex: 3;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background: linear-gradient(135deg, #6C63FF, #9D6FFF);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        #results {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #6C63FF, #9D6FFF);
+            text-align: center;
+            padding: 10px;
+            color: white;
+            font-size: 14px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 
     <header>
+        <a href="main.html">Go Back</a>
         <h1>Search for Properties</h1>
-        
-        <a href="main.html" class="go-to-main-btn">Go back</a>
-        Easy Broker
     </header>
 
     <main>
-        <form id="searchForm" class="search-form">
-            <!-- Location Dropdown -->
-            <div class="form-group">
-                <label for="location">Location</label>
-                <select id="location" name="location">
-                    <option value="">All</option>
-                    <option value="sahel">Sahel</option>
-                    <option value="new_cairo">New Cairo</option>
-                    <option value="october">October</option>
-                </select>
+        <div class="search-container">
+            <form id="searchForm" class="search-form">
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <select id="location" name="location">
+                        <option value="">All</option>
+                        <option value="sahel">Sahel</option>
+                        <option value="new_cairo">New Cairo</option>
+                        <option value="october">October</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="developer">Developer</label>
+                    <select id="developer" name="developer">
+                        <option value="">All</option>
+                        <option value="MV">MV</option>
+                        <option value="Tatweer misr">Tatweer Misr</option>
+                        <option value="roya">Roya</option>
+                        <option value="PRE">PRE</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="type">Property Type</label>
+                    <select id="type" name="type">
+                        <option value="">All</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="villa">Villa</option>
+                        <option value="office">Office</option>
+                        <option value="store">Store</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="deliveryDate">Delivery Date</label>
+                    <select id="deliveryDate" name="deliveryDate">
+                        <option value="">All</option>
+                        <option value="RM">RM</option>
+                        <option value="1y">1 year</option>
+                        <option value="2y">2 years</option>
+                        <option value="3y">3 years</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="budgetRange">Budget Range</label>
+                    <select id="budgetRange" name="budgetRange">
+                        <option value="">All</option>
+                        <option value="5000000-10000000">5M - 10M</option>
+                        <option value="10000001-20000000">10M - 20M</option>
+                        <option value="20000001-50000000">20M - 50M</option>
+                        <option value="50000001-100000000">50M - 100M</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="downpayment">Down Payment</label>
+                    <select id="downpayment" name="downpayment">
+                        <option value="">All</option>
+                        <option value="0-500000">0 - 500K</option>
+                        <option value="500000-1000000">500K - 1M</option>
+                        <option value="1000001-2000000">1M - 2M</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="installments">Installments Range</label>
+                    <select id="installments" name="installments">
+                        <option value="">All</option>
+                        <option value="0-50000">0 - 50K</option>
+                        <option value="50000-100000">50K - 100K</option>
+                    </select>
+                </div>
+                <button type="button" id="searchButton">Search</button>
+            </form>
+            <div id="results">
+                <p>Results will appear here.</p>
             </div>
-
-            <!-- Developer Dropdown -->
-            <div class="form-group">
-                <label for="developer">Developer</label>
-                <select id="developer" name="developer">
-                    <option value="">All</option>
-                    <option value="MV">MV</option>
-                    <option value="Tatweer misr">Tatweer misr</option>
-                    <option value="roya">Roya</option>
-                    <option value="PRE">PRE</option>
-                </select>
-            </div>
-
-            <!-- Property Type Dropdown -->
-            <div class="form-group">
-                <label for="type">Property Type</label>
-                <select id="type" name="type">
-                    <option value="">All</option>
-                    <option value="apartment">Apartment</option>
-                    <option value="villa">Villa</option>
-                    <option value="office">Office</option>
-                    <option value="store">Store</option>
-                </select>
-            </div>
-    
-            <!-- Delivery Date Dropdown (Updated ID) -->
-            <div class="form-group">
-                <label for="deliveryDate">Delivery Date</label>
-                <select id="deliveryDate" name="deliveryDate">
-                    <option value="">All</option>
-                    <option value="RM">RM</option>
-                    <option value="1y">1y</option>
-                    <option value="2y">2y</option>
-                    <option value="3y">3y</option>
-                </select>
-            </div>
-
-            <!-- Budget Range Dropdown -->
-            <div class="form-group">
-                <label for="budgetRange">Budget Range</label>
-                <select id="budgetRange" name="budgetRange">
-                    <option value="">All</option>
-                    <option value="5000000-10000000">5 million - 10 million</option>
-                    <option value="10000001-20000000">10 million - 20 million</option>
-                    <option value="20000001-50000000">20 million - 50 million</option>
-                    <option value="50000001-100000000">50 million - 100 million</option>
-                    <option value="100000001-150000000">100 million - 150 million</option>
-                </select>
-            </div>
-
-            <!-- Down Payment Dropdown -->
-            <div class="form-group">
-                <label for="downpayment">Down Payment</label>
-                <select id="downpayment" name="downpayment">
-                    <option value="">All</option>
-                    <option value="0-500000">0 million - 0.5 million</option>
-                    <option value="500000-1000000">0.5 million - 1 million</option>
-                    <option value="1000001-2000000">1 million - 2 million</option>
-                    <option value="2000001-5000000">2 million - 5 million</option>
-                    <option value="5000001-10000000">5 million - 10 million</option>
-                    <option value="10000001-15000000">10 million - 15 million</option>
-                </select>
-            </div>
-
-            <!-- Installments Dropdown -->
-            <div class="form-group">
-                <label for="installments">Installments Range</label>
-                <select id="installments" name="installments">
-                    <option value="">All</option>
-                    <option value="0-500000">0K - 50K</option>
-                    <option value="50000-100000">50K - 100K</option>
-                    <option value="100001-150000">100K - 150K</option>
-                    <option value="150001-200000">150K - 200K</option>
-                    <option value="200001-300000">200K - 300K</option>
-                    <option value="300001-100000000000">300K - 10000000K</option>
-                </select>
-            </div>
-
-            <!-- Search Button -->
-            <button type="button" id="searchButton">Search</button>
-        </form>
-
-        <!-- Results Section -->
-        <div id="results"></div>
+        </div>
     </main>
-    
+
     <footer>
-        <p>&copy; 2024 Property Broker System</p>
+        &copy; 2025 Property Broker System
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>

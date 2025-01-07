@@ -46,24 +46,15 @@ function loadCSV() {
 function filterProperties() {
     console.log("Filtering properties...");
 
-    const location = document.getElementById("location")?.value.trim() || "";
-    const developer = document.getElementById("developer")?.value.trim() || "";
-    const type = document.getElementById("type")?.value.trim() || "";
+    const location = document.getElementById("location")?.value.trim().toLowerCase() || "";
+    const developer = document.getElementById("developer")?.value.trim().toLowerCase() || "";
+    const type = document.getElementById("type")?.value.trim().toLowerCase() || "";
     const budgetRange = document.getElementById("budgetRange")?.value.trim() || "";
     const downpayment = document.getElementById("downpayment")?.value.trim() || "";
     const installments = document.getElementById("installments")?.value.trim() || "";
-    const deliveryDate = document.getElementById("deliveryDate")?.value.trim() || "";
-    const category = document.getElementById("category")?.value.trim() || "";
-    const model = document.getElementById("model")?.value.trim() || "";
-    const floor = document.getElementById("floor")?.value.trim() || "";
-    const phase = document.getElementById("phase")?.value.trim() || "";
-    const minBUA = parseFloat(document.getElementById("minBUA")?.value.trim()) || 0;
-    const minGardenArea = parseFloat(document.getElementById("minGardenArea")?.value.trim()) || 0;
-    const minLandArea = parseFloat(document.getElementById("minLandArea")?.value.trim()) || 0;
-    const minRoofArea = parseFloat(document.getElementById("minRoofArea")?.value.trim()) || 0;
-    const parking = document.getElementById("parking")?.value.trim() || "";
+    const deliveryDate = document.getElementById("deliveryDate")?.value.trim().toLowerCase() || "";
 
-    // تقسيم نطاق الميزانية إلى الحد الأدنى والحد الأقصى
+    // Parse ranges into min and max
     const [minBudget, maxBudget] = budgetRange
         ? budgetRange.split("-").map(value => parseFloat(value) || 0)
         : [0, Infinity];
@@ -74,24 +65,14 @@ function filterProperties() {
         ? installments.split("-").map(value => parseFloat(value) || 0)
         : [0, Infinity];
 
-    // تصفية العقارات بناءً على المعايير المختارة
     const filteredProperties = properties.filter(property => {
-        const matchesLocation = !location || property.location === location;
-        const matchesDeveloper = !developer || property.developer === developer;
-        const matchesType = !type || property.type === type;
+        const matchesLocation = !location || property.location.toLowerCase() === location;
+        const matchesDeveloper = !developer || property.developer.toLowerCase() === developer;
+        const matchesType = !type || property.type.toLowerCase() === type;
         const matchesBudget = property.budget >= minBudget && property.budget <= maxBudget;
         const matchesDownpayment = property.downPayment >= minDownpayment && property.downPayment <= maxDownpayment;
         const matchesInstallments = property.installments >= minInstallments && property.installments <= maxInstallments;
-        const matchesDeliveryDate = !deliveryDate || property.deliveryDate === deliveryDate;
-        const matchesCategory = !category || property.category === category;
-        const matchesModel = !model || property.model === model;
-        const matchesFloor = !floor || property.floor === floor;
-        const matchesPhase = !phase || property.phase === phase;
-        const matchesBUA = property.bua >= minBUA;
-        const matchesGardenArea = property.gardenArea >= minGardenArea;
-        const matchesLandArea = property.landArea >= minLandArea;
-        const matchesRoofArea = property.roofArea >= minRoofArea;
-        const matchesParking = !parking || property.parking === parking;
+        const matchesDeliveryDate = !deliveryDate || property.deliveryDate.toLowerCase() === deliveryDate;
 
         return matchesLocation &&
             matchesDeveloper &&
@@ -99,17 +80,12 @@ function filterProperties() {
             matchesBudget &&
             matchesDownpayment &&
             matchesInstallments &&
-            matchesDeliveryDate &&
-            matchesCategory &&
-            matchesModel &&
-            matchesFloor &&
-            matchesPhase &&
-            matchesBUA &&
-            matchesGardenArea &&
-            matchesLandArea &&
-            matchesRoofArea &&
-            matchesParking;
+            matchesDeliveryDate;
     });
+
+    console.log("Filtered Properties:", filteredProperties);
+
+    displayResults(filteredProperties);
 
     console.log("Filtered Properties:", filteredProperties); // عرض العقارات المصفاة في الكونسول
 

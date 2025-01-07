@@ -1,47 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Easy Broker - Main Page</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #000000;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #000000; /* Solid color background */
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
         }
 
         .main-container {
             text-align: center;
+            animation: bounceIn 1.2s ease;
+            margin-top: 50px;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
         }
 
         .logo {
-            max-width: 400px;
+            max-width: 600px;
             margin-bottom: 40px;
+            border: 3px solid #6C63FF;
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 36px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
         }
 
         .main-button {
             display: inline-block;
-            margin: 20px;
-            padding: 20px 40px; /* Increased button size */
-            font-size: 22px; /* Increased font size */
-            background-color: #d67316;
+            margin: 15px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #6C63FF, #9D6FFF);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 50px;
             cursor: pointer;
             text-decoration: none;
-            transition: background-color 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .main-button:hover {
-            background-color: #d67316;
+            transform: scale(1.2) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffa600;
+        }
+
+        .section {
+            width: 80%;
+            margin: 40px 0;
+            text-align: center;
         }
 
         footer {
@@ -49,22 +94,79 @@
             bottom: 0;
             width: 100%;
             text-align: center;
-            background-color: #000000;
+            background: linear-gradient(135deg, #6C63FF, #9D6FFF);
             color: white;
             padding: 10px 0;
+            font-size: 14px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        footer a {
+            color: #FFFACD;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #FFD700;
         }
     </style>
 </head>
 <body>
 
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="broker.html">Dashboard</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <!-- Main Content -->
     <div class="main-container">
         <img src="logo.jpg" alt="Easy Broker Logo" class="logo">
-        <h1>Welcome to Easy Broker</h1>
-        <a href="broker.html" class="main-button">Go to Dashboard</a>
-        <a href="developers.html" class="main-button">Go to Developers</a>
+        <h1>Welcome to Easy Broker!</h1>
+        <a href="broker.html" class="main-button">🎉 Go to Dashboard</a>
+        <a href="developers.html" class="main-button">💻 Go to Developers</a>
     </div>
 
-    <footer>&copy; 2025 Easy Broker. All rights reserved.</footer>
+    <!-- Introduction Section -->
+    <div class="section">
+        <h2>About Easy Broker</h2>
+        <p>Easy Broker is a platform that connects brokers with the most reliable and profitable investment opportunities. We provide easy-to-use tools to manage portfolios and offer expert insights to help you succeed in the financial market.</p>
+    </div>
+
+    <!-- Features Section -->
+    <div class="section">
+        <h2>Our Features</h2>
+        <ul>
+            <li>Real-time Market Data</li>
+            <li>Advanced Charting Tools</li>
+            <li>Secure Transactions</li>
+            <li>24/7 Customer Support</li>
+        </ul>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="section">
+        <h2>What Our Clients Say</h2>
+        <p>"Easy Broker helped me double my investment in just 6 months. A game-changer in my career!" - John Doe</p>
+        <p>"The platform is user-friendly and the support team is always there for me." - Jane Smith</p>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="section">
+        <h2>Get in Touch</h2>
+        <p>If you have any questions, feel free to reach out to us. We're here to help!</p>
+        <a href="contact.html" class="main-button">Contact Us</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Easy Broker. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a>
+    </footer>
 
 </body>
 </html>

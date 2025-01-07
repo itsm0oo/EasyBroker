@@ -3,15 +3,30 @@ document.getElementById("signUpForm").addEventListener("submit", function (event
 
     const email = document.getElementById("email-signup").value;
     const password = document.getElementById("password-signup").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+    }
 
     fetch("http://localhost:4000/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
     })
-        .then(response => response.text())
-        .then(message => alert(message))
-        .catch(error => console.error("Error:", error));
+        .then((response) => {
+            if (response.ok) {
+                return response.text();
+            } else {
+                throw new Error("Sign-Up failed.");
+            }
+        })
+        .then((message) => {
+            alert(message);
+            window.location.href = "sign-in.html"; // Redirect to Sign-In page
+        })
+        .catch((error) => alert(error.message));
 });
 
 document.getElementById("loginForm").addEventListener("submit", function (event) {
@@ -25,13 +40,16 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
     })
-        .then(response => {
+        .then((response) => {
             if (response.ok) {
-                alert("Sign In successful!");
-                window.location.href = "main.html"; // Redirect to dashboard
+                return response.text();
             } else {
-                alert("Invalid email or password.");
+                throw new Error("Invalid email or password.");
             }
         })
-        .catch(error => console.error("Error:", error));
+        .then((message) => {
+            alert(message);
+            window.location.href = "main.html"; // Redirect to dashboard
+        })
+        .catch((error) => alert(error.message));
 });

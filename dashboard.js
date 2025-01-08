@@ -44,11 +44,19 @@ function populateFilterOptions(filterId, options) {
 function filterData(data) {
     const locationFilter = document.getElementById("location").value;
     const developerFilter = document.getElementById("developer").value;
+    const ProjectFilter = document.getElementById("Project").value;
+    const TypeFilter = document.getElementById("Type").value;
+    const CategoryFilter = document.getElementById("Category").value;
+    const DeliveryDateFilter = document.getElementById("DeliveryDate").value;
 
     const filteredData = data.filter(item => {
         return (
             (locationFilter === "" || item.Location === locationFilter) &&
-            (developerFilter === "" || item.Developer === developerFilter)
+            (developerFilter === "" || item.Developer === developerFilter)&&
+            (developerFilter === "" || item.Project === ProjectFilter)&&
+            (developerFilter === "" || item.Type === TypeFilter)&&
+            (developerFilter === "" || item.Category === CategoryFilter)&&
+            (developerFilter === "" || item.DeliveryDate === DeliveryDateFilter)
         );
     });
 

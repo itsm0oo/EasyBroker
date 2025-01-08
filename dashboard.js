@@ -17,6 +17,22 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("developer").addEventListener("change", function () {
                 filterData(data);
             });
+
+            document.getElementById("Project").addEventListener("change", function () {
+                filterData(data);
+            });
+
+            document.getElementById("Type").addEventListener("change", function () {
+                filterData(data);
+            });
+
+            document.getElementById("Category").addEventListener("change", function () {
+                filterData(data);
+            });
+
+            document.getElementById("DeliveryDate").addEventListener("change", function () {
+                filterData(data);
+            });
         },
     });
 });
@@ -25,9 +41,17 @@ document.addEventListener("DOMContentLoaded", function () {
 function initializeFilters(data) {
     const locationSet = new Set(data.map(item => item.Location));
     const developerSet = new Set(data.map(item => item.Developer));
+    const ProjectSet = new Set(data.map(item => item.Location));
+    const TypeSet = new Set(data.map(item => item.Developer));
+    const CategorySet = new Set(data.map(item => item.Location));
+    const DeliveryDateSet = new Set(data.map(item => item.Developer));
 
     populateFilterOptions("location", locationSet);
     populateFilterOptions("developer", developerSet);
+    populateFilterOptions("Project", ProjectSet);
+    populateFilterOptions("Type", TypeSet);
+    populateFilterOptions("Category", CategorySet);
+    populateFilterOptions("DeliveryDate", DeliveryDateSet);
 }
 
 function populateFilterOptions(filterId, options) {

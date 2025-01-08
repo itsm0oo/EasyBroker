@@ -17,6 +17,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     filterData(data);
                 });
             });
+
+            // Attach event listeners for range filters
+            document.getElementById("minPrice").addEventListener("input", function () {
+                filterData(data);
+            });
+            document.getElementById("maxPrice").addEventListener("input", function () {
+                filterData(data);
+            });
+            document.getElementById("minBUA").addEventListener("input", function () {
+                filterData(data);
+            });
+            document.getElementById("maxBUA").addEventListener("input", function () {
+                filterData(data);
+            });
         },
     });
 });
@@ -60,12 +74,24 @@ function filterData(data) {
         DeliveryDate: document.getElementById("DeliveryDate").value,
     };
 
+    const minPrice = parseFloat(document.getElementById("minPrice").value) || 0;
+    const maxPrice = parseFloat(document.getElementById("maxPrice").value) || Infinity;
+    const minBUA = parseFloat(document.getElementById("minBUA").value) || 0;
+    const maxBUA = parseFloat(document.getElementById("maxBUA").value) || Infinity;
+
     const filteredData = data.filter(item => {
-        return Object.keys(filters).every(key => {
-            const filterValue = filters[key];
-            const itemValue = item[key.charAt(0).toUpperCase() + key.slice(1)]?.trim();
-            return filterValue === "" || itemValue === filterValue;
-        });
+        const price = parseFloat(item.Price) || 0;
+        const bua = parseFloat(item.BUA) || 0;
+
+        return (
+            Object.keys(filters).every(key => {
+                const filterValue = filters[key];
+                const itemValue = item[key.charAt(0).toUpperCase() + key.slice(1)]?.trim();
+                return filterValue === "" || itemValue === filterValue;
+            }) &&
+            price >= minPrice && price <= maxPrice &&
+            bua >= minBUA && bua <= maxBUA
+        );
     });
 
     displayResults(filteredData);

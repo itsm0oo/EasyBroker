@@ -10,28 +10,12 @@ document.addEventListener("DOMContentLoaded", function () {
             initializeFilters(data);
             displayResults(data);
 
-            document.getElementById("location").addEventListener("change", function () {
-                filterData(data);
-            });
-
-            document.getElementById("developer").addEventListener("change", function () {
-                filterData(data);
-            });
-
-            document.getElementById("Project").addEventListener("change", function () {
-                filterData(data);
-            });
-
-            document.getElementById("Type").addEventListener("change", function () {
-                filterData(data);
-            });
-
-            document.getElementById("Category").addEventListener("change", function () {
-                filterData(data);
-            });
-
-            document.getElementById("DeliveryDate").addEventListener("change", function () {
-                filterData(data);
+            // Attach event listeners to all filter elements
+            const filters = ["location", "developer", "Project", "Type", "Category", "DeliveryDate"];
+            filters.forEach(filterId => {
+                document.getElementById(filterId).addEventListener("change", function () {
+                    filterData(data);
+                });
             });
         },
     });
@@ -39,23 +23,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Initialize filters dynamically
 function initializeFilters(data) {
-    const locationSet = new Set(data.map(item => item.Location));
-    const developerSet = new Set(data.map(item => item.developerSet));
-    const ProjectSet = new Set(data.map(item => item.ProjectSet));
-    const TypeSet = new Set(data.map(item => item.Type));
-    const CategorySet = new Set(data.map(item => item.Category));
-    const DeliveryDateSet = new Set(data.map(item => item.DeliveryDate));
+    const filterMappings = {
+        location: "Location",
+        developer: "Developer",
+        Project: "Project",
+        Type: "Type",
+        Category: "Category",
+        DeliveryDate: "DeliveryDate",
+    };
 
-    populateFilterOptions("location", locationSet);
-    populateFilterOptions("developer", developerSet);
-    populateFilterOptions("Project", ProjectSet);
-    populateFilterOptions("Type", TypeSet);
-    populateFilterOptions("Category", CategorySet);
-    populateFilterOptions("DeliveryDate", DeliveryDateSet);
+    for (const [filterId, fieldName] of Object.entries(filterMappings)) {
+        const uniqueValues = new Set(data.map(item => item[fieldName]?.trim()).filter(Boolean));
+        populateFilterOptions(filterId, uniqueValues);
+    }
 }
 
 function populateFilterOptions(filterId, options) {
     const select = document.getElementById(filterId);
+    select.innerHTML = `<option value="">All</option>`; // Add default "All" option
     options.forEach(option => {
         const opt = document.createElement("option");
         opt.value = option;
@@ -66,22 +51,21 @@ function populateFilterOptions(filterId, options) {
 
 // Filter and display data
 function filterData(data) {
-    const locationFilter = document.getElementById("location").value;
-    const developerFilter = document.getElementById("developer").value;
-    const ProjectFilter = document.getElementById("Project").value;
-    const TypeFilter = document.getElementById("Type").value;
-    const CategoryFilter = document.getElementById("Category").value;
-    const DeliveryDateFilter = document.getElementById("DeliveryDate").value;
+    const filters = {
+        location: document.getElementById("location").value,
+        developer: document.getElementById("developer").value,
+        Project: document.getElementById("Project").value,
+        Type: document.getElementById("Type").value,
+        Category: document.getElementById("Category").value,
+        DeliveryDate: document.getElementById("DeliveryDate").value,
+    };
 
     const filteredData = data.filter(item => {
-        return (
-            (locationFilter === "" || item.Location === locationFilter) &&
-            (developerFilter === "" || item.Developer === developerFilter)&&
-            (developerFilter === "" || item.Project === ProjectFilter)&&
-            (developerFilter === "" || item.Type === TypeFilter)&&
-            (developerFilter === "" || item.Category === CategoryFilter)&&
-            (developerFilter === "" || item.DeliveryDate === DeliveryDateFilter)
-        );
+        return Object.keys(filters).every(key => {
+            const filterValue = filters[key];
+            const itemValue = item[key.charAt(0).toUpperCase() + key.slice(1)]?.trim();
+            return filterValue === "" || itemValue === filterValue;
+        });
     });
 
     displayResults(filteredData);
@@ -102,15 +86,15 @@ function displayResults(data) {
             <td>${row.Category || ""}</td>
             <td>${row.Model || ""}</td>
             <td>${row.Floor || ""}</td>
-            <td>${row.price || ""}</td>
+            <td>${row.Price || ""}</td>
             <td>${row.DeliveryDate || ""}</td>
             <td>${row.DownPayment || ""}</td>
             <td>${row.Installments || ""}</td>
-            <td>${row.Maintinance || ""}</td>
+            <td>${row.Maintenance || ""}</td>
             <td>${row.Phase || ""}</td>
             <td>${row.BUA || ""}</td>
             <td>${row.GardenArea || ""}</td>
-            <td>${row.landArea || ""}</td>
+            <td>${row.LandArea || ""}</td>
             <td>${row.RoofArea || ""}</td>
             <td>${row.Parking || ""}</td>
         `;

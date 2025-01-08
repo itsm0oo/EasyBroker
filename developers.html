@@ -6,14 +6,15 @@
     <title>Easy Broker - Photo Buttons</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #000000;
-            color: #000000;
+            background: #000000;
+            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
+            height: 100vh;
         }
 
         .go-to-main-btn {
@@ -22,21 +23,34 @@
             top: 20px;
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #d67316;
+            background: linear-gradient(135deg, #6C63FF, #9D6FFF);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 50px;
             text-decoration: none;
-            transition: background-color 0.3s;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .go-to-main-btn:hover {
-            background-color: #d67316;
+            transform: scale(1.2) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         .logo {
-            margin-top: 20px;
-            max-height: 150px;
+            max-width: 600px;
+            margin-top: 50px;
+            margin-bottom: 40px;
+            border: 3px solid #6C63FF;
+            border-radius: 50%;
+            animation: bounceIn 1.2s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
         }
 
         .photo-container {
@@ -52,7 +66,7 @@
             margin: 15px;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease;
             position: relative;
         }
 
@@ -70,7 +84,7 @@
         .photo-button p {
             margin-top: 10px;
             font-size: 16px;
-            color: #333;
+            color: #fff;
         }
 
         .asterisks {
@@ -79,19 +93,32 @@
             left: -10px;
             right: -10px;
             bottom: -10px;
-            border: 2px dashed #d67316;
+            border: 2px dashed #6C63FF;
             border-radius: 10px;
             pointer-events: none;
         }
 
         footer {
-            background-color: #000000;
+            background: linear-gradient(135deg, #6C63FF, #9D6FFF);
             color: white;
             text-align: center;
             padding: 10px 0;
+            font-size: 14px;
             position: fixed;
             bottom: 0;
             width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        footer a {
+            color: #FFFACD;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #FFD700;
         }
 
         @media (max-width: 768px) {
@@ -142,7 +169,9 @@
         </script>
     </div>
 
-    <footer>&copy; 2025 Easy Broker. All rights reserved.</footer>
+    <footer>
+        &copy; 2025 Easy Broker. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a>
+    </footer>
 
 </body>
 </html>

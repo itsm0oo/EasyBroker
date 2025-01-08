@@ -13,6 +13,25 @@
       font-family: Arial, sans-serif;
     }
 
+    .lobby-button {
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #6C63FF, #9D6FFF);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .lobby-button:hover {
+            transform: scale(1.2) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
     /* Header styles */
     header {
       display: flex;
@@ -56,7 +75,7 @@
 <body>
   <!-- Header Section -->
   <header>
-    <a href="index.html" class="lobby-button">Lobby</a>
+    <a href="index.html" class="lobby-button">🛖 Lobby</a>
     <div class="header-title">Easy Broker</div>
   </header>
 

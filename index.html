@@ -8,14 +8,14 @@
     <style>
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: #000000; /* Solid color background */
-        color: #fff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: #000000; /* Solid color background */
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
         }
 
         .main-container {
@@ -60,6 +60,26 @@
 
         .main-button:hover {
             transform: scale(1.2) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* New Projects Button Style */
+        .projects-button {
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #494949, #747474); /* Different color */
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: not-allowed; /* Not clickable */
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .projects-button:hover {
+            transform: scale(1.1) rotate(5deg);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
@@ -131,6 +151,7 @@
         <a href="dashboard.html" class="main-button">🎉 Go to Dashboard</a>
         <a href="developers.html" class="main-button">💻 Go to Developers</a>
         <a href="wikimapia.html" class="main-button">🗺️ Go to Map</a> <!-- الزر الجديد -->
+        <a class="projects-button">📁 Projects (Coming Soon)</a> <!-- Non-clickable Projects Button -->
     </div>
     
 

@@ -40,11 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
 // Initialize filters dynamically
 function initializeFilters(data) {
     const locationSet = new Set(data.map(item => item.Location));
-    const developerSet = new Set(data.map(item => item.Developer));
-    const ProjectSet = new Set(data.map(item => item.Location));
-    const TypeSet = new Set(data.map(item => item.Developer));
-    const CategorySet = new Set(data.map(item => item.Location));
-    const DeliveryDateSet = new Set(data.map(item => item.Developer));
+    const developerSet = new Set(data.map(item => item.developerSet));
+    const ProjectSet = new Set(data.map(item => item.ProjectSet));
+    const TypeSet = new Set(data.map(item => item.Type));
+    const CategorySet = new Set(data.map(item => item.Category));
+    const DeliveryDateSet = new Set(data.map(item => item.DeliveryDate));
 
     populateFilterOptions("location", locationSet);
     populateFilterOptions("developer", developerSet);

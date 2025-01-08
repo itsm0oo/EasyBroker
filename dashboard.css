@@ -1,0 +1,102 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6; /* Soft background color */
+    color: #333; /* Dark text for readability */
+    margin: 0;
+    padding: 20px;
+}
+
+/* Header */
+h1 {
+    color: #2c3e50; /* Slightly darker color for title */
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+/* Filters Section */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+    background-color: #fff; /* White background for the filter area */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 200px; /* Flex to allow filters to wrap and have space */
+}
+
+label {
+    font-weight: bold;
+    color: #34495e;
+    font-size: 1em;
+}
+
+select, input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 100%;
+    max-width: 200px; /* Limit the width for better alignment */
+    transition: border-color 0.3s ease;
+}
+
+select:focus, input[type="number"]:focus {
+    border-color: #3498db; /* Blue border on focus for better visibility */
+    outline: none;
+}
+
+/* Result Table Section */
+#results {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #ecf0f1; /* Light gray background for headers */
+    color: #34495e;
+    font-size: 1.1em;
+}
+
+td {
+    background-color: #fff;
+    color: #7f8c8d;
+}
+
+td:hover {
+    background-color: #f7f7f7; /* Subtle highlight on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    table {
+        font-size: 0.8em;
+    }
+}

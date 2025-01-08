@@ -127,3 +127,4 @@ function displayResults(data) {
         tbody.appendChild(tr);
     });
 }
+

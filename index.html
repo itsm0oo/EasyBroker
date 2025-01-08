@@ -1,141 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <h1>Easy Broker</h1>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up / Sign In</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Linking your provided CSS -->
+    <title>Easy Broker - Main Page</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #000000; /* Solid color background */
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        }
+
+        .main-container {
+            text-align: center;
+            animation: bounceIn 1.2s ease;
+            margin-top: 50px;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .logo {
+            max-width: 600px;
+            margin-bottom: 40px;
+            border: 3px solid #6C63FF;
+            border-radius: 50%;
+        }
+
+        h1 {
+            font-size: 36px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .main-button {
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background: linear-gradient(135deg, #6C63FF, #9D6FFF);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-button:hover {
+            transform: scale(1.2) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffa600;
+        }
+
+        .section {
+            width: 80%;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background: linear-gradient(135deg, #6C63FF, #9D6FFF);
+            color: white;
+            padding: 10px 0;
+            font-size: 14px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        footer a {
+            color: #FFFACD;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #FFD700;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="forms-container">
-            <!-- Sign-Up / Sign-In Forms Container -->
-            <div class="signin-signup">
-                <!-- Sign-Up Form -->
-                <form id="signUpForm" class="sign-up-form">
-                    <h1 class="title">Sign Up</h1>
-                    <div class="input-field">
-                        <i class="fas fa-user"></i>
-                        <input type="email" id="email-signup" placeholder="Enter your email" required />
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="password-signup" placeholder="Enter your password" required />
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required />
-                    </div>
-                    <button type="submit" class="btn">Sign Up</button>
-                </form>
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+    </nav>
 
-                <!-- Sign-In Form -->
-                <form id="loginForm" class="sign-in-form">
-                    <h1 class="title">Sign In</h1>
-                    <div class="input-field">
-                        <i class="fas fa-user"></i>
-                        <input type="email" id="email-signin" placeholder="Enter your email" required />
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="password-signin" placeholder="Enter your password" required />
-                    </div>
-                    <button type="submit" class="btn">Sign In</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Panels -->
-        <div class="panels-container">
-            <div class="panel left-panel">
-                <div class="content">
-                    <h3>New here?</h3>
-                    <p>Enter your personal details and start your journey with us</p>
-                    <button id="sign-up-btn" class="btn transparent">Sign Up</button>
-                </div>
-            </div>
-            <div class="panel right-panel">
-                <div class="content">
-                    <h3>Already have an account?</h3>
-                    <p>Sign in with your personal info</p>
-                    <button id="sign-in-btn" class="btn transparent">Sign In</button>
-                </div>
-            </div>
-        </div>
+    <!-- Main Content -->
+    <div class="main-container">
+        <img src="logo.jpg" alt="Easy Broker Logo" class="logo">
+        <h1>Welcome to Easy Broker!</h1>
+        <a href="dashboard.html" class="main-button">🎉 Go to Dashboard</a>
+        <a href="developers.html" class="main-button">💻 Go to Developers</a>
     </div>
 
-    <!-- Script for Sign In / Sign Up functionality -->
-    <script>
-        // Selecting the sign-up and sign-in buttons
-        const signInBtn = document.querySelector("#sign-in-btn");
-        const signUpBtn = document.querySelector("#sign-up-btn");
-        const container = document.querySelector(".container");
+    <!-- Introduction Section -->
+    <div class="section">
+        <h2>About Easy Broker</h2>
+        <p>Easy Broker is a platform that connects brokers with the most reliable and profitable investment opportunities. We provide easy-to-use tools to manage portfolios and offer expert insights to help you succeed in the financial market.</p>
+    </div>
 
-        // Adding event listeners to handle form switching
-        signUpBtn.addEventListener("click", () => {
-            container.classList.add("sign-up-mode");
-        });
+    <!-- Features Section -->
+    <div class="section">
+        <h2>Our Features</h2>
+        <ul>
+            <li>Real-time Market Data</li>
+            <li>Advanced Charting Tools</li>
+            <li>Secure Transactions</li>
+            <li>24/7 Customer Support</li>
+        </ul>
+    </div>
 
-        signInBtn.addEventListener("click", () => {
-            container.classList.remove("sign-up-mode");
-        });
+    <!-- Testimonials Section -->
+    <div class="section">
+        <h2>What Our Clients Say</h2>
+        <p>"Easy Broker helped me double my investment in just 6 months. A game-changer in my career!" - John Doe</p>
+        <p>"The platform is user-friendly and the support team is always there for me." - Jane Smith</p>
+    </div>
 
-        // Handling Sign Up Form Submission
-        document.getElementById("signUpForm").addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent form from submitting
+    <!-- Contact Section -->
+    <div class="section">
+        <h2>Get in Touch</h2>
+        <p>If you have any questions, feel free to reach out to us. We're here to help!</p>
+        <a href="contact.html" class="main-button">Contact Us</a>
+    </div>
 
-            const email = document.getElementById("email-signup").value;
-            const password = document.getElementById("password-signup").value;
-            const confirmPassword = document.getElementById("confirmPassword").value;
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Easy Broker. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact Us</a>
+    </footer>
 
-            // Password confirmation check
-            if (password !== confirmPassword) {
-                alert("Passwords do not match.");
-                return;
-            }
-
-            // Get existing users from localStorage or initialize an empty array
-            let users = JSON.parse(localStorage.getItem("users")) || [];
-
-            // Check if the email already exists
-            if (users.some((user) => user.email === email)) {
-                alert("An account with this email already exists.");
-                return;
-            }
-
-            // Save new user in localStorage
-            users.push({ email, password });
-            localStorage.setItem("users", JSON.stringify(users));
-
-            alert("Account created successfully!");
-            window.location.href = "sign-in.html"; // Redirect to Sign-In page after successful sign up
-        });
-
-        // Handling Sign In Form Submission
-        document.getElementById("loginForm").addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent form from submitting
-
-            const email = document.getElementById("email-signin").value;
-            const password = document.getElementById("password-signin").value;
-
-            // Get users from localStorage
-            let users = JSON.parse(localStorage.getItem("users")) || [];
-
-            // Find user with matching email and password
-            const user = users.find((user) => user.email === email && user.password === password);
-
-            if (user) {
-                alert("Sign In successful!");
-                window.location.href = "main.html"; // Redirect to dashboard after successful login
-            } else {
-                alert("Invalid email or password.");
-            }
-        });
-    </script>
 </body>
 </html>
-
-
-<link rel="stylesheet" href="style.css">

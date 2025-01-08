@@ -68,7 +68,19 @@ function displayResults(data) {
             <td>${row.Project || ""}</td>
             <td>${row.Type || ""}</td>
             <td>${row.Category || ""}</td>
-            <td>${row.Price || ""}</td>
+            <td>${row.Model || ""}</td>
+            <td>${row.Floor || ""}</td>
+            <td>${row.price || ""}</td>
+            <td>${row.DeliveryDate || ""}</td>
+            <td>${row.DownPayment || ""}</td>
+            <td>${row.Installments || ""}</td>
+            <td>${row.Maintinance || ""}</td>
+            <td>${row.Phase || ""}</td>
+            <td>${row.BUA || ""}</td>
+            <td>${row.GardenArea || ""}</td>
+            <td>${row.landArea || ""}</td>
+            <td>${row.RoofArea || ""}</td>
+            <td>${row.Parking || ""}</td>
         `;
         tbody.appendChild(tr);
     });

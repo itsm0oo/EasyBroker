@@ -10,6 +10,53 @@
             font-family: Arial, sans-serif;
             margin: 20px;
         }
+
+        /* Lobby Button Styles */
+        .lobby-button {
+            display: inline-block;
+            background-color: #3498db; /* Blue background */
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-bottom: 20px; /* Space between button and header */
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .lobby-button:hover {
+            transform: translateY(-5px); /* Button moves up slightly on hover */
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+
+        /* Back Button Styles */
+        .back-button {
+            display: inline-block;
+            background-color: #000000; /* Red background */
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-bottom: 20px; /* Space between button and header */
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-5px); /* Button moves up slightly on hover */
+            background-color: #272727; /* Darker red on hover */
+        }
+
+        /* Header Section */
+        h1 {
+            color: #2c3e50; /* Slightly darker color for title */
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        /* Filters Section */
         .filters {
             display: flex;
             flex-wrap: wrap;
@@ -37,9 +84,11 @@
             background-color: #f4f4f4;
         }
     </style>
-    
 </head>
 <body>
+    <!-- Back Button -->
+    <a href="main.html" class="back-button">Lobby</a>
+
     <h1>Properties Dashboard</h1>
 
     <!-- Filters -->
@@ -94,8 +143,6 @@
             <label for="maxBUA">Max BUA:</label>
             <input type="number" id="maxBUA" placeholder="Max">
         </div>
-        
-        <!-- Add more filters as needed -->
     </div>
 
     <!-- Result Box -->
@@ -121,8 +168,6 @@
                     <th>landArea</th>
                     <th>RoofArea</th>
                     <th>Parking</th>
-
-                    <!-- Add more columns -->
                 </tr>
             </thead>
             <tbody>

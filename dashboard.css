@@ -89,6 +89,17 @@ td:hover {
     background-color: #f7f7f7; /* Subtle highlight on hover */
 }
 
+/* Active Sorting Button Style */
+.lobby-button.active {
+    background-color: #bdc3c7; /* Gray color for inactive */
+    cursor: not-allowed; /* Make the button look disabled */
+}
+
+/* Hover state for inactive button */
+.lobby-button.active:hover {
+    transform: none; /* Disable hover effect for inactive button */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .filters {

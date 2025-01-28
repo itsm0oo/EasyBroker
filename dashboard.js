@@ -1,4 +1,5 @@
 let filteredData = []; // Declare filteredData globally
+let sortState = 'HighestBUA'; // Initially set to 'HighestBUA'
 
 // Load CSV and populate filters
 document.addEventListener("DOMContentLoaded", function () {
@@ -35,15 +36,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 filterData(data);
             });
 
-            // Sorting and displaying the results
+            // Sorting buttons
             document.getElementById("sortByHighestBUA").addEventListener("click", function () {
-                const sortedData = [...filteredData].sort((a, b) => (parseFloat(b.BUA) || 0) - (parseFloat(a.BUA) || 0));
-                displayResults(sortedData);
+                if (sortState === 'HighestBUA') {
+                    sortState = 'LowestPrice'; // Toggle to lowest price
+                    const sortedData = [...filteredData].sort((a, b) => (parseFloat(a.Price) || Infinity) - (parseFloat(b.Price) || Infinity));
+                    displayResults(sortedData);
+                } else {
+                    sortState = 'HighestBUA'; // Toggle to highest BUA
+                    const sortedData = [...filteredData].sort((a, b) => (parseFloat(b.BUA) || 0) - (parseFloat(a.BUA) || 0));
+                    displayResults(sortedData);
+                }
             });
 
             document.getElementById("sortByLowestPrice").addEventListener("click", function () {
-                const sortedData = [...filteredData].sort((a, b) => (parseFloat(a.Price) || Infinity) - (parseFloat(b.Price) || Infinity));
-                displayResults(sortedData);
+                if (sortState === 'LowestPrice') {
+                    sortState = 'HighestBUA'; // Toggle to highest BUA
+                    const sortedData = [...filteredData].sort((a, b) => (parseFloat(b.BUA) || 0) - (parseFloat(a.BUA) || 0));
+                    displayResults(sortedData);
+                } else {
+                    sortState = 'LowestPrice'; // Toggle to lowest price
+                    const sortedData = [...filteredData].sort((a, b) => (parseFloat(a.Price) || Infinity) - (parseFloat(b.Price) || Infinity));
+                    displayResults(sortedData);
+                }
             });
         },
     });

@@ -46,14 +46,7 @@ document.getElementById("sortByHighestBUA").addEventListener("click", function (
         // Toggle active class
         document.getElementById("sortByHighestBUA").classList.add("active");
         document.getElementById("sortByLowestPrice").classList.remove("active");
-    } else {
-        sortState = 'HighestBUA'; // Toggle to highest BUA
-        const sortedData = [...filteredData].sort((a, b) => (parseFloat(b.BUA) || 0) - (parseFloat(a.BUA) || 0));
-        displayResults(sortedData);
-
-        // Toggle active class
-        document.getElementById("sortByHighestBUA").classList.remove("active");
-        document.getElementById("sortByLowestPrice").classList.add("active");
+   
     }
 });
 
@@ -66,14 +59,7 @@ document.getElementById("sortByLowestPrice").addEventListener("click", function 
         // Toggle active class
         document.getElementById("sortByHighestBUA").classList.remove("active");
         document.getElementById("sortByLowestPrice").classList.add("active");
-    } else {
-        sortState = 'LowestPrice'; // Toggle to lowest price
-        const sortedData = [...filteredData].sort((a, b) => (parseFloat(a.Price) || Infinity) - (parseFloat(b.Price) || Infinity));
-        displayResults(sortedData);
-
-        // Toggle active class
-        document.getElementById("sortByHighestBUA").classList.add("active");
-        document.getElementById("sortByLowestPrice").classList.remove("active");
+    
     }
 });
 

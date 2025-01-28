@@ -1,5 +1,3 @@
-let filteredData = []; // Declare globally
-
 // Load CSV and populate filters
 document.addEventListener("DOMContentLoaded", function () {
     const csvFile = "properties.csv";
@@ -10,44 +8,70 @@ document.addEventListener("DOMContentLoaded", function () {
         complete: function (results) {
             const data = results.data;
             initializeFilters(data);
-            filteredData = data; // Initialize with all data
             displayResults(data);
 
             // Attach event listeners to all filter elements
             const filters = ["location", "developer", "Project", "Type", "Category", "DeliveryDate"];
             filters.forEach(filterId => {
                 document.getElementById(filterId).addEventListener("change", function () {
-                    filteredData = filterData(data);
+                    filterData(data);
                 });
             });
 
             // Attach event listeners for range filters
             document.getElementById("minPrice").addEventListener("input", function () {
-                filteredData = filterData(data);
+                filterData(data);
             });
             document.getElementById("maxPrice").addEventListener("input", function () {
-                filteredData = filterData(data);
+                filterData(data);
             });
             document.getElementById("minBUA").addEventListener("input", function () {
-                filteredData = filterData(data);
+                filterData(data);
             });
             document.getElementById("maxBUA").addEventListener("input", function () {
-                filteredData = filterData(data);
+                filterData(data);
             });
-
             // Sorting and displaying the results
-            document.getElementById("sortByHighestBUA").addEventListener("click", function () {
-                const sortedData = [...filteredData].sort((a, b) => (parseFloat(b.BUA) || 0) - (parseFloat(a.BUA) || 0));
-                displayResults(sortedData);
-            });
+document.getElementById("sortByHighestBUA").addEventListener("click", function () {
+    const sortedData = [...filteredData].sort((a, b) => (parseFloat(b.BUA) || 0) - (parseFloat(a.BUA) || 0));
+    displayResults(sortedData);
+});
 
-            document.getElementById("sortByLowestPrice").addEventListener("click", function () {
-                const sortedData = [...filteredData].sort((a, b) => (parseFloat(a.Price) || Infinity) - (parseFloat(b.Price) || Infinity));
-                displayResults(sortedData);
-            });
+document.getElementById("sortByLowestPrice").addEventListener("click", function () {
+    const sortedData = [...filteredData].sort((a, b) => (parseFloat(a.Price) || Infinity) - (parseFloat(b.Price) || Infinity));
+    displayResults(sortedData);
+});
         },
     });
 });
+
+// Initialize filters dynamically
+function initializeFilters(data) {
+    const filterMappings = {
+        location: "Location",
+        developer: "Developer",
+        Project: "Project",
+        Type: "Type",
+        Category: "Category",
+        DeliveryDate: "DeliveryDate",
+    };
+
+    for (const [filterId, fieldName] of Object.entries(filterMappings)) {
+        const uniqueValues = new Set(data.map(item => item[fieldName]?.trim()).filter(Boolean));
+        populateFilterOptions(filterId, uniqueValues);
+    }
+}
+
+function populateFilterOptions(filterId, options) {
+    const select = document.getElementById(filterId);
+    select.innerHTML = `<option value="">All</option>`; // Add default "All" option
+    options.forEach(option => {
+        const opt = document.createElement("option");
+        opt.value = option;
+        opt.textContent = option;
+        select.appendChild(opt);
+    });
+}
 
 // Filter and display data
 function filterData(data) {
@@ -65,7 +89,7 @@ function filterData(data) {
     const minBUA = parseFloat(document.getElementById("minBUA").value) || 0;
     const maxBUA = parseFloat(document.getElementById("maxBUA").value) || Infinity;
 
-    filteredData = data.filter(item => {
+    const filteredData = data.filter(item => {
         const price = parseFloat(item.Price) || 0;
         const bua = parseFloat(item.BUA) || 0;
 
@@ -79,7 +103,7 @@ function filterData(data) {
             bua >= minBUA && bua <= maxBUA
         );
     });
-
+    
     // Update the unit count
     const unitCountElement = document.getElementById("unitCount");
     if (filteredData.length > 0) {
@@ -89,5 +113,38 @@ function filterData(data) {
     }
 
     displayResults(filteredData);
-    return filteredData; // Return the filtered data
 }
+
+
+// Display results in the table
+function displayResults(data) {
+    const tbody = document.querySelector("#results tbody");
+    tbody.innerHTML = ""; // Clear existing rows
+
+    data.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${row.Location || ""}</td>
+            <td>${row.Developer || ""}</td>
+            <td>${row.Project || ""}</td>
+            <td>${row.Type || ""}</td>
+            <td>${row.Category || ""}</td>
+            <td>${row.Model || ""}</td>
+            <td>${row.Floor || ""}</td>
+            <td>${row.Price || ""}</td>
+            <td>${row.DeliveryDate || ""}</td>
+            <td>${row.DownPayment || ""}</td>
+            <td>${row.Installments || ""}</td>
+            <td>${row.Maintenance || ""}</td>
+            <td>${row.Phase || ""}</td>
+            <td>${row.BUA || ""}</td>
+            <td>${row.GardenArea || ""}</td>
+            <td>${row.LandArea || ""}</td>
+            <td>${row.RoofArea || ""}</td>
+            <td>${row.Parking || ""}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+

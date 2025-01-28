@@ -92,6 +92,10 @@
             font-weight: bold;
             color: #2c3e50; /* Dark text for better visibility */
         }
+        
+        .lobby-button.active {
+            background-color: #2ecc71; /* Green background for active button */
+        }
     </style>
 </head>
 <body>
@@ -153,10 +157,10 @@
             <input type="number" id="maxBUA" placeholder="Max">
         </div>
         <!-- Sorting Buttons -->
-<div class="sorting-buttons" style="margin-bottom: 20px;">
-    <button id="sortByHighestBUA" class="lobby-button">Sort by Highest BUA</button>
-    <button id="sortByLowestPrice" class="lobby-button">Sort by Lowest Price</button>
-</div>
+        <div class="sorting-buttons" style="margin-bottom: 20px;">
+            <button id="sortByHighestBUA" class="lobby-button">Sort by Highest BUA</button>
+            <button id="sortByLowestPrice" class="lobby-button">Sort by Lowest Price</button>
+        </div>
 
     </div>
     
@@ -198,5 +202,23 @@
     <!-- Include JavaScript files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script src="dashboard.js"></script>
+
+    <!-- Added JavaScript for sorting button functionality -->
+    <script>
+        // Get sorting buttons
+        const sortByHighestBUA = document.getElementById('sortByHighestBUA');
+        const sortByLowestPrice = document.getElementById('sortByLowestPrice');
+
+        // Add event listeners to buttons
+        sortByHighestBUA.addEventListener('click', function() {
+            this.classList.add('active');
+            sortByLowestPrice.classList.remove('active');
+        });
+
+        sortByLowestPrice.addEventListener('click', function() {
+            this.classList.add('active');
+            sortByHighestBUA.classList.remove('active');
+        });
+    </script>
 </body>
 </html>

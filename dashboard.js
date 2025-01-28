@@ -93,9 +93,18 @@ function filterData(data) {
             bua >= minBUA && bua <= maxBUA
         );
     });
+    
+    // Update the unit count
+    const unitCountElement = document.getElementById("unitCount");
+    if (filteredData.length > 0) {
+        unitCountElement.textContent = `Number of Units Available: ${filteredData.length}`;
+    } else {
+        unitCountElement.textContent = "No Units Match Your Filters.";
+    }
 
     displayResults(filteredData);
 }
+
 
 // Display results in the table
 function displayResults(data) {
@@ -127,4 +136,14 @@ function displayResults(data) {
         tbody.appendChild(tr);
     });
 }
+// Sorting and displaying the results
+document.getElementById("sortByHighestBUA").addEventListener("click", function () {
+    const sortedData = [...filteredData].sort((a, b) => (parseFloat(b.BUA) || 0) - (parseFloat(a.BUA) || 0));
+    displayResults(sortedData);
+});
+
+document.getElementById("sortByLowestPrice").addEventListener("click", function () {
+    const sortedData = [...filteredData].sort((a, b) => (parseFloat(a.Price) || Infinity) - (parseFloat(b.Price) || Infinity));
+    displayResults(sortedData);
+});
 

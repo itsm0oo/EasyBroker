@@ -85,6 +85,13 @@
         th {
             background-color: #f4f4f4;
         }
+
+        #unitCount {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50; /* Dark text for better visibility */
+        }
     </style>
 </head>
 <body>
@@ -145,10 +152,20 @@
             <label for="maxBUA">Max BUA:</label>
             <input type="number" id="maxBUA" placeholder="Max">
         </div>
+        <!-- Sorting Buttons -->
+<div class="sorting-buttons" style="margin-bottom: 20px;">
+    <button id="sortByHighestBUA" class="lobby-button">Sort by Highest BUA</button>
+    <button id="sortByLowestPrice" class="lobby-button">Sort by Lowest Price</button>
+</div>
+
     </div>
+    
 
     <!-- Result Box -->
     <div id="results">
+        <div id="unitCount" style="margin-bottom: 20px; font-size: 1.2em; font-weight: bold; color: #2c3e50; text-align: center;">
+            <!-- Number of units will appear here -->
+        </div>
         <table>
             <thead>
                 <tr>
@@ -180,6 +197,6 @@
 
     <!-- Include JavaScript files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    <script src="dashboard.js"></script> <!-- Connects to your JS file -->
+    <script src="dashboard.js"></script>
 </body>
 </html>

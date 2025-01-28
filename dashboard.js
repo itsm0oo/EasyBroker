@@ -1,3 +1,5 @@
+let filteredData = []; // Declare filteredData globally
+
 // Load CSV and populate filters
 document.addEventListener("DOMContentLoaded", function () {
     const csvFile = "properties.csv";
@@ -8,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         complete: function (results) {
             const data = results.data;
             initializeFilters(data);
+            filteredData = data; // Initialize with all data
             displayResults(data);
 
             // Attach event listeners to all filter elements
@@ -31,16 +34,17 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("maxBUA").addEventListener("input", function () {
                 filterData(data);
             });
-            // Sorting and displaying the results
-document.getElementById("sortByHighestBUA").addEventListener("click", function () {
-    const sortedData = [...filteredData].sort((a, b) => (parseFloat(b.BUA) || 0) - (parseFloat(a.BUA) || 0));
-    displayResults(sortedData);
-});
 
-document.getElementById("sortByLowestPrice").addEventListener("click", function () {
-    const sortedData = [...filteredData].sort((a, b) => (parseFloat(a.Price) || Infinity) - (parseFloat(b.Price) || Infinity));
-    displayResults(sortedData);
-});
+            // Sorting and displaying the results
+            document.getElementById("sortByHighestBUA").addEventListener("click", function () {
+                const sortedData = [...filteredData].sort((a, b) => (parseFloat(b.BUA) || 0) - (parseFloat(a.BUA) || 0));
+                displayResults(sortedData);
+            });
+
+            document.getElementById("sortByLowestPrice").addEventListener("click", function () {
+                const sortedData = [...filteredData].sort((a, b) => (parseFloat(a.Price) || Infinity) - (parseFloat(b.Price) || Infinity));
+                displayResults(sortedData);
+            });
         },
     });
 });
@@ -89,7 +93,7 @@ function filterData(data) {
     const minBUA = parseFloat(document.getElementById("minBUA").value) || 0;
     const maxBUA = parseFloat(document.getElementById("maxBUA").value) || Infinity;
 
-    const filteredData = data.filter(item => {
+    filteredData = data.filter(item => {
         const price = parseFloat(item.Price) || 0;
         const bua = parseFloat(item.BUA) || 0;
 
@@ -115,7 +119,6 @@ function filterData(data) {
     displayResults(filteredData);
 }
 
-
 // Display results in the table
 function displayResults(data) {
     const tbody = document.querySelector("#results tbody");
@@ -123,7 +126,7 @@ function displayResults(data) {
 
     data.forEach(row => {
         const tr = document.createElement("tr");
-        tr.innerHTML = `
+        tr.innerHTML = ` 
             <td>${row.Location || ""}</td>
             <td>${row.Developer || ""}</td>
             <td>${row.Project || ""}</td>
@@ -146,5 +149,3 @@ function displayResults(data) {
         tbody.appendChild(tr);
     });
 }
-
-

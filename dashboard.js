@@ -1,5 +1,5 @@
 let filteredData = []; // Declare filteredData globally
-let sortState = 'HighestBUA'; // Initially set to 'HighestBUA'
+let sortState = ''; // Initially set to 'HighestBUA'
 
 // Load CSV and populate filters
 document.addEventListener("DOMContentLoaded", function () {

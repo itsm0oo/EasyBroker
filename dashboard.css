@@ -111,3 +111,11 @@ td:hover {
         font-size: 0.8em;
     }
 }
+input[type="number"] {
+    width: 120px; /* Increase width */
+    height: 35px; /* Increase height */
+    font-size: 1.1em; /* Make text bigger */
+    padding: 5px; /* Add some padding for better appearance */
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light border */
+}

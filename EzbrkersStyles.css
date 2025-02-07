@@ -1,0 +1,246 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    margin: 0;
+    padding: 0;
+}
+
+header, footer {
+    background-color: #000000;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Form styling */
+form {
+    background-color: rgb(114, 114, 114);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap if needed */
+    gap: 20px; /* Adds space between form elements */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold; /* Make the labels stand out */
+    width: 100%; /* Ensure labels take full width */
+}
+
+input, select, button {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; /* Make input and select elements take full width */
+}
+
+input[type="number"], select {
+    width: 100%; /* Make sure number inputs and select take full width */
+}
+
+/* Adjust input size for horizontal layout */
+input[type="number"], select, button {
+    width: 48%; /* Make them occupy 48% of the available space */
+}
+
+/* Adjusting layout for larger screens */
+@media (min-width: 768px) {
+    input[type="number"], select, button {
+        width: 48%; /* For larger screens, inputs take up 48% of the form width */
+    }
+
+    /* If we need additional spacing, we can adjust margins here */
+    input[type="number"], select {
+        margin-right: 4%; /* Right margin for spacing between inputs */
+    }
+}
+
+/* Styling the submit button */
+button {
+    background-color: #d67316;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    width: 100%; /* Make the submit button take full width */
+}
+
+button:hover {
+    background-color: #d67316;
+}
+
+/* Results section styling */
+#results {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    min-height: 100px; /* Ensure enough space for results */
+    max-height: 500px; /* Optional: max height to prevent too long list */
+    overflow-y: auto; /* Allow scrolling if results exceed max-height */
+}
+
+.property {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.property:hover {
+    background-color: #e8e8e8;
+}
+
+.property h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.property-location, .property-developer, .property-price {
+    font-size: 16px;
+    color: #555;
+}
+
+.property-price {
+    font-weight: bold;
+    color: #2d9cdb; /* A distinct color for price */
+}
+
+.property-location {
+    margin-bottom: 10px;
+}
+
+/* Style for dynamic filters */
+#apartmentFilter, #villaFilter {
+    margin-top: 10px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Sign-In Button Styling */
+.sign-in-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #d67316;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.sign-in-btn:hover {
+    background-color: #d67316;
+}
+
+
+
+.add-property-btn:hover {
+    background-color: #d67316;
+}
+
+/* Additional Styling for Search Results */
+.property-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.property-details .property-location,
+.property-details .property-developer,
+.property-details .property-price {
+    margin-bottom: 8px;
+}
+
+.property-details h4 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Enhance Results Container */
+#results ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#results li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+    background-color: #fafafa;
+}
+
+#results li:last-child {
+    border-bottom: none;
+}
+header {
+    background-color: #000000;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+}
+
+.go-to-main-btn {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #d67316;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.go-to-main-btn:hover {
+    background-color: #d67316;
+}
+.property-list {
+    list-style: none;
+    padding: 0;
+}
+
+.property-item {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.property-details {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.property-field {
+    width: 50%;
+    margin-bottom: 5px;
+}

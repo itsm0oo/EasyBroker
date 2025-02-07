@@ -154,8 +154,7 @@ function displayResults(data) {
             <td>${row.Floor || ""}</td>
             <td>${row.Price || ""}</td>
             <td>${row.DeliveryDate || ""}</td>
-            <td>${row.DownPayment || ""}</td>
-            <td>${row.Installments || ""}</td>
+            <td>${row.Payment-Plan || ""}</td>
             <td>${row.Maintenance || ""}</td>
             <td>${row.Phase || ""}</td>
             <td>${row.BUA || ""}</td>
